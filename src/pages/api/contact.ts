@@ -4,7 +4,7 @@
 // SSR adapter (e.g. @astrojs/node) before deploying so this route runs.
 import type { APIRoute } from "astro";
 
-export const prerender = false;
+export const prerender = true;
 
 export const POST: APIRoute = async ({ request }) => {
   try {

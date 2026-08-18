@@ -30,7 +30,26 @@ export type IconName =
   | "alarm"
   | "pos"
   | "printer"
-  | "shield-check";
+  | "shield-check"
+  | "sun"
+  | "moon"
+  | "menu"
+  | "close"
+  | "chevron-down"
+  | "chevron-right"
+  | "arrow-right"
+  | "check"
+  | "phone"
+  | "mail"
+  | "mapPin"
+  | "quote"
+  | "star"
+  | "shield2-lock"
+  | "clock-4"
+  | "map"
+  | "stack"
+  | "linkedin"
+  | "facebook";
 
 export const categoryLabels: Record<ServiceCategory, string> = {
   it: "Obsługa i Infrastruktura IT",
