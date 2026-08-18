@@ -12,12 +12,13 @@ const faqItems: AccordionItem[] = [
       "Czas reakcji określa umowa SLA dopasowana do zakresu współpracy — standardowo odpowiadamy na zgłoszenia priorytetowe w ciągu kilku godzin roboczych.",
   },
   {
-    question: "Czy obsługujecie firmy poza Krakowem?",
+    question: "Czy obsługujecie firmy poza Poznaniem?",
     answer:
       "Tak — wsparcie zdalne świadczymy w całej Polsce, a serwis stacjonarny realizujemy w Krakowie i najbliższych okolicach.",
   },
   {
-    question: "Czy mogę zamówić tylko jedną usługę, np. samą stronę internetową?",
+    question:
+      "Czy mogę zamówić tylko jedną usługę, np. samą stronę internetową?",
     answer:
       "Oczywiście. Każdą z usług — stronę, sklep, monitoring czy fiskalizację — można zamówić osobno, bez konieczności podpisywania pełnej umowy na obsługę IT.",
   },
@@ -27,14 +28,19 @@ const faqItems: AccordionItem[] = [
       "Tak, każda współpraca jest potwierdzona umową i rozliczana na podstawie faktury VAT zgodnie z obowiązującymi przepisami.",
   },
   {
-    question: "Ile trwa wdrożenie systemu kasowego POS lub fiskalizacja urządzenia?",
+    question:
+      "Ile trwa wdrożenie systemu kasowego POS lub fiskalizacja urządzenia?",
     answer:
-      "Standardowe wdrożenie, wraz z konfiguracją i fiskalizacją, zajmuje zwykle od kilku dni do dwóch tygodni — zależnie od zakresu integracji z magazynem.",
+      "Standardowo dwa do trzech dni. W przypadku systemów kasowych POS czas wdrożenia zależy od zakresu prac.",
   },
 ];
 ---
 
-<section class="py-16 md:py-24 lg:py-32" data-od-id="faq" aria-labelledby="faq-heading">
+<section
+  class="py-16 md:py-24 lg:py-32"
+  data-od-id="faq"
+  aria-labelledby="faq-heading"
+>
   <Container class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
     <SectionHeading
       eyebrow="FAQ"
