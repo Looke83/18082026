@@ -33,7 +33,11 @@ const testimonials: Testimonial[] = [
 ];
 ---
 
-<section class="bg-(--color-surface) py-16 md:py-24 lg:py-32" data-od-id="testimonials" aria-labelledby="testimonials-heading">
+<section
+  class="bg-(--color-surface) py-16 md:py-24 lg:py-32"
+  data-od-id="testimonials"
+  aria-labelledby="testimonials-heading"
+>
   <Container>
     <SectionHeading
       eyebrow="Opinie klientów"
@@ -42,18 +46,29 @@ const testimonials: Testimonial[] = [
     />
 
     <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-      {testimonials.map((t, index) => (
-        <figure class="card-surface flex flex-col p-6 md:p-8" data-od-id={`testimonial-${index}`}>
-          <Icon name="quote" class="h-6 w-6 text-(--color-primary-light)" aria-hidden="true" />
-          <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-(--color-text-secondary)">
-            "{t.quote}"
-          </blockquote>
-          <figcaption class="mt-6 border-t border-(--color-border) pt-4">
-            <p class="text-sm font-semibold text-(--color-text-primary)">{t.name}</p>
-            <p class="text-xs text-(--color-text-muted)">{t.role}</p>
-          </figcaption>
-        </figure>
-      ))}
+      {
+        testimonials.map((t, index) => (
+          <figure
+            class="card-surface flex flex-col p-6 md:p-8"
+            data-od-id={`testimonial-${index}`}
+          >
+            <Icon
+              name="quote"
+              class="h-6 w-6 text-(--color-primary-light)"
+              aria-hidden={true}
+            />
+            <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-(--color-text-secondary)">
+              "{t.quote}"
+            </blockquote>
+            <figcaption class="mt-6 border-t border-(--color-border) pt-4">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
+                {t.name}
+              </p>
+              <p class="text-xs text-(--color-text-muted)">{t.role}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
     </div>
   </Container>
 </section>

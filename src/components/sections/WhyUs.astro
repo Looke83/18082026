@@ -13,29 +13,37 @@ interface Reason {
 
 const reasons: Reason[] = [
   {
-    icon: "clock",
+    icon: "clock-4",
     title: "Szybki czas reakcji",
-    description: "Umowy SLA z jasno określonym czasem reakcji — wiesz, na co możesz liczyć, zanim problem się pojawi.",
+    description:
+      "Umowy SLA z jasno określonym czasem reakcji — wiesz, na co możesz liczyć, zanim problem się pojawi.",
   },
   {
-    icon: "map-pin",
+    icon: "mapPin",
     title: "Lokalna obecność",
-    description: "Serwis stacjonarny w Twojej okolicy — nie tylko zdalne wsparcie przez telefon i e-mail.",
+    description:
+      "Serwis stacjonarny w Twojej okolicy — nie tylko zdalne wsparcie przez telefon i e-mail.",
   },
   {
-    icon: "layers",
+    icon: "stack",
     title: "Kompleksowość usług",
-    description: "Infrastruktura, strony, bezpieczeństwo i fiskalizacja — jeden dostawca zamiast pięciu kontraktów.",
+    description:
+      "Infrastruktura, strony, bezpieczeństwo i fiskalizacja — jeden dostawca zamiast pięciu kontraktów.",
   },
   {
-    icon: "shield-lock",
+    icon: "shield2-lock",
     title: "Doświadczenie i certyfikaty",
-    description: "Lata praktyki w obsłudze firm z różnych branż — od biur po sklepy i punkty usługowe.",
+    description:
+      "Lata praktyki w obsłudze firm z różnych branż — od biur po sklepy i punkty usługowe.",
   },
 ];
 ---
 
-<section class="bg-(--color-surface) py-16 md:py-24 lg:py-32" data-od-id="why-us" aria-labelledby="why-us-heading">
+<section
+  class="bg-(--color-surface) py-16 md:py-24 lg:py-32"
+  data-od-id="why-us"
+  aria-labelledby="why-us-heading"
+>
   <Container>
     <SectionHeading
       eyebrow="Dlaczego my"
@@ -44,15 +52,21 @@ const reasons: Reason[] = [
     />
 
     <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-      {reasons.map((reason) => (
-        <div class="flex flex-col" data-od-id={`why-us-${reason.icon}`}>
-          <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-(--color-background) text-(--color-primary) shadow-sm">
-            <Icon name={reason.icon} class="h-6 w-6" />
-          </span>
-          <h3 class="text-lg font-semibold text-(--color-text-primary)">{reason.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-(--color-text-secondary)">{reason.description}</p>
-        </div>
-      ))}
+      {
+        reasons.map((reason) => (
+          <div class="flex flex-col" data-od-id={`why-us-${reason.icon}`}>
+            <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-(--color-background) text-(--color-primary) shadow-sm">
+              <Icon name={reason.icon} class="h-6 w-6" />
+            </span>
+            <h3 class="text-lg font-semibold text-(--color-text-primary)">
+              {reason.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-(--color-text-secondary)">
+              {reason.description}
+            </p>
+          </div>
+        ))
+      }
     </div>
   </Container>
 </section>
