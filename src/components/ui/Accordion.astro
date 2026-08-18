@@ -1,0 +1,38 @@
+---
+// Generic accessible accordion built on native <details>/<summary>.
+// Keyboard support and screen-reader semantics come for free.
+export interface AccordionItem {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  items: AccordionItem[];
+  class?: string;
+  "data-od-id"?: string;
+}
+
+const { items, class: className = "", ...rest } = Astro.props;
+---
+
+<div class:list={["divide-y divide-(--color-border)", className]} {...rest}>
+  {items.map((item, index) => (
+    <details class="group py-2" data-od-id={`accordion-item-${index}`}>
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left text-base md:text-lg font-semibold text-(--color-text-primary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-primary) rounded-lg"
+      >
+        <span>{item.question}</span>
+        <svg
+          class="h-5 w-5 flex-shrink-0 text-(--color-primary) transition-transform duration-200 group-open:rotate-180"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <div class="pb-4 pr-8 text-(--color-text-secondary) leading-relaxed">
+        {item.answer}
+      </div>
+    </details>
+  ))}
+</div>

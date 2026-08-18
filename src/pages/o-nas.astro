@@ -1,0 +1,111 @@
+---
+// About page — company story, values and a closing CTA.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import Icon from "../components/ui/Icon.astro";
+import CTASection from "../components/sections/CTASection.astro";
+import type { IconName } from "../data/services";
+
+const values: { icon: IconName; title: string; description: string }[] = [
+  {
+    icon: "shield-check",
+    title: "Rzetelność",
+    description: "Umowy, terminy i wyceny, które są dotrzymywane — bez niedomówień i skrytych kosztów.",
+  },
+  {
+    icon: "clock",
+    title: "Szybkość reakcji",
+    description: "Rozumiemy, że przestój kosztuje — dlatego czas reakcji jest dla nas priorytetem numer jeden.",
+  },
+  {
+    icon: "layers",
+    title: "Kompleksowość",
+    description: "Zamiast kierować klienta do kolejnego dostawcy, rozwiązujemy problem od A do Z we własnym zespole.",
+  },
+];
+---
+
+<BaseLayout
+  title="O nas"
+  description="Poznaj zespół way-IT Łukasz Kufel — historię firmy, wartości i podejście do obsługi klientów biznesowych."
+  path="/o-nas"
+>
+  <section class="section-glow-hero pt-14 pb-16 md:pt-20 md:pb-20" data-od-id="about-hero" aria-labelledby="about-hero-heading">
+    <Container class="max-w-3xl">
+      <p class="eyebrow mb-4">O nas</p>
+      <h1 id="about-hero-heading" class="text-4xl font-bold tracking-tight text-(--color-text-primary) sm:text-5xl">
+        way-IT Łukasz Kufel — technologia, na której można się oprzeć
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-(--color-text-secondary)">
+        Zaczynaliśmy jako serwis obsługujący lokalne firmy w zakresie infrastruktury IT.
+        Z czasem rozwinęliśmy się w zespół, który projektuje strony i sklepy internetowe,
+        montuje systemy monitoringu i alarmowe oraz wdraża urządzenia fiskalne — bez
+        konieczności angażowania kilku niezależnych dostawców.
+      </p>
+    </Container>
+  </section>
+
+  <section class="border-t border-(--color-border) py-16 md:py-24" data-od-id="about-story" aria-labelledby="about-story-heading">
+    <Container class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 id="about-story-heading" class="text-2xl font-bold tracking-tight text-(--color-text-primary) md:text-3xl">
+          Jak działamy
+        </h2>
+        <p class="mt-4 leading-relaxed text-(--color-text-secondary)">
+          Każde zlecenie zaczynamy od zrozumienia realnej potrzeby biznesowej — nie sprzedajemy
+          usług "z półki". Dzięki temu klienci dostają rozwiązania dopasowane do skali i budżetu
+          firmy, a nie uniwersalny pakiet, który tylko częściowo odpowiada na ich problem.
+        </p>
+        <p class="mt-4 leading-relaxed text-(--color-text-secondary)">
+          Obsługujemy firmy z branży handlowej, usługowej i produkcyjnej — od pojedynczych
+          stanowisk komputerowych po sieci obejmujące kilka lokalizacji, systemy kasowe i
+          monitoring obiektów.
+        </p>
+      </div>
+      <div class="card-surface p-8 md:p-10">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-(--color-text-muted)">Obszary kompetencji</h3>
+        <ul class="mt-5 space-y-3 text-sm text-(--color-text-secondary)">
+          <li class="flex items-center gap-3">
+            <Icon name="server" class="h-5 w-5 flex-shrink-0 text-(--color-primary)" />
+            Infrastruktura IT i obsługa informatyczna
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon name="code" class="h-5 w-5 flex-shrink-0 text-(--color-primary)" />
+            Strony i sklepy internetowe
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon name="cctv" class="h-5 w-5 flex-shrink-0 text-(--color-primary)" />
+            Monitoring CCTV i systemy alarmowe
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon name="pos" class="h-5 w-5 flex-shrink-0 text-(--color-primary)" />
+            Systemy kasowe i urządzenia fiskalne
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+  <section class="bg-(--color-surface) py-16 md:py-24" data-od-id="about-values" aria-labelledby="about-values-heading">
+    <Container>
+      <SectionHeading eyebrow="Wartości" title="To, na czym budujemy współpracę" data-od-id="about-values-heading" />
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
+        {values.map((value) => (
+          <div data-od-id={`about-value-${value.icon}`}>
+            <span class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-(--color-background) text-(--color-primary) shadow-sm">
+              <Icon name={value.icon} class="h-6 w-6" />
+            </span>
+            <h3 class="text-lg font-semibold text-(--color-text-primary)">{value.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-(--color-text-secondary)">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <CTASection
+    title="Chcesz przenieść swoją firmę na solidne fundamenty IT?"
+    description="Napisz do nas — odpowiemy z konkretną propozycją, nie ogólnikami."
+  />
+</BaseLayout>

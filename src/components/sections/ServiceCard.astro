@@ -1,0 +1,33 @@
+---
+// Single category/service card used by ServicesGrid on the homepage
+// and re-usable on category-related listings.
+import Card from "../ui/Card.astro";
+import Icon from "../ui/Icon.astro";
+import type { IconName } from "../../data/services";
+
+export interface Props {
+  icon: IconName;
+  title: string;
+  description: string;
+  href: string;
+  class?: string;
+  "data-od-id"?: string;
+}
+
+const { icon, title, description, href, class: className = "", ...rest } = Astro.props;
+---
+
+<Card as="article" hoverable class:list={["flex h-full flex-col", className]} {...rest}>
+  <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-(--color-primary-light) text-(--color-primary)">
+    <Icon name={icon} class="h-6 w-6" />
+  </span>
+  <h3 class="text-lg font-semibold text-(--color-text-primary)">{title}</h3>
+  <p class="mt-3 flex-1 text-sm leading-relaxed text-(--color-text-secondary)">{description}</p>
+  <a
+    href={href}
+    class="link-underline mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-(--color-primary)"
+  >
+    Dowiedz się więcej
+    <Icon name="arrow-right" class="h-4 w-4" />
+  </a>
+</Card>

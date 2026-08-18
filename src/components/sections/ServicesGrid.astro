@@ -1,0 +1,40 @@
+---
+// 4 category cards mirroring the mega menu columns — data-driven from
+// services.ts, no hardcoded category copy here.
+import Container from "../layout/Container.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import ServiceCard from "./ServiceCard.astro";
+import {
+  serviceCategories,
+  categoryLabels,
+  categoryDescriptions,
+  categoryIcons,
+  getServicesByCategory,
+} from "../../data/services";
+---
+
+<section id="oferta" class="border-t border-(--color-border) py-16 md:py-24 lg:py-32" data-od-id="services-grid" aria-labelledby="oferta-heading">
+  <Container>
+    <SectionHeading
+      eyebrow="Oferta"
+      title="Cztery obszary, jeden zespół"
+      description="Od codziennej obsługi IT, przez strony i sklepy internetowe, po bezpieczeństwo i fiskalizację — wszystko pod jednym numerem telefonu."
+      data-od-id="oferta-heading"
+    />
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {serviceCategories.map((category) => {
+        const firstService = getServicesByCategory(category)[0];
+        return (
+          <ServiceCard
+            icon={categoryIcons[category]}
+            title={categoryLabels[category]}
+            description={categoryDescriptions[category]}
+            href={`/uslugi/${firstService.slug}`}
+            data-od-id={`service-card-${category}`}
+          />
+        );
+      })}
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,22 @@
+---
+// Grayscale partner/client logo strip. Uses simple lettermark placeholders
+// clearly generic (not fabricated brand identities) until real logos exist.
+import Container from "../layout/Container.astro";
+
+const marks = ["ALFA", "NOVATECH", "BERBREIS", "GRUPA MK", "PRIMEX", "OSTOJA"];
+---
+
+<section class="border-t border-(--color-border) py-12 md:py-16" data-od-id="logos-strip" aria-label="Firmy, które nam zaufały">
+  <Container>
+    <p class="mb-8 text-center text-xs font-semibold uppercase tracking-wider text-(--color-text-muted)">
+      Firmy, które nam zaufały
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale">
+      {marks.map((mark) => (
+        <span class="font-heading text-lg font-bold tracking-tight text-(--color-text-secondary)">
+          {mark}
+        </span>
+      ))}
+    </div>
+  </Container>
+</section>

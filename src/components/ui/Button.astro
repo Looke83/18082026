@@ -1,0 +1,59 @@
+---
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
+export type ButtonSize = "sm" | "md" | "lg";
+
+export interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  class?: string;
+  target?: string;
+  rel?: string;
+  "aria-label"?: string;
+  "data-od-id"?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  type = "button",
+  class: className = "",
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 whitespace-nowrap";
+
+const sizes: Record<ButtonSize, string> = {
+  sm: "px-4 py-2 text-sm min-h-[40px]",
+  md: "px-6 py-3 text-base min-h-[44px]",
+  lg: "px-8 py-4 text-lg min-h-[52px]",
+};
+
+const variants: Record<ButtonVariant, string> = {
+  primary:
+    "bg-(--color-primary) text-(--color-primary-fg) hover:bg-(--color-primary-hover) hover:scale-[1.02] shadow-sm focus-visible:outline-(--color-primary)",
+  secondary:
+    "bg-(--color-primary-light) text-(--color-primary) border border-(--color-primary-light) hover:bg-(--color-primary) hover:text-(--color-primary-fg) focus-visible:outline-(--color-primary)",
+  outline:
+    "bg-transparent text-(--color-primary) border border-(--color-primary) hover:bg-(--color-primary) hover:text-(--color-primary-fg) focus-visible:outline-(--color-primary)",
+  ghost:
+    "bg-transparent text-(--color-text-primary) hover:text-(--color-primary) underline-offset-4 hover:underline focus-visible:outline-(--color-primary)",
+};
+
+const classes = [base, sizes[size], variants[variant], className].join(" ");
+---
+
+{href ? (
+  <a href={href} class={classes} target={target} rel={rel} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} {...rest}>
+    <slot />
+  </button>
+)}

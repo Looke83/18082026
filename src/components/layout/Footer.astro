@@ -1,0 +1,104 @@
+---
+// Footer reads exclusively from data/navigation.ts — company blurb,
+// nav links, offer links and contact details all come from one source.
+import Container from "./Container.astro";
+import Icon from "../ui/Icon.astro";
+import { footerColumns, socialLinks } from "../../data/navigation";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-(--color-border) bg-(--color-surface)" data-od-id="site-footer">
+  <Container class="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+    <div>
+      <a href="/" class="flex items-center gap-2 font-heading text-xl font-bold tracking-tight text-(--color-text-primary)">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-(--color-primary) text-(--color-primary-fg)">w</span>
+        {footerColumns.company.title}
+      </a>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-(--color-text-secondary)">
+        {footerColumns.company.description}
+      </p>
+      <div class="mt-6 flex gap-3">
+        {socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex h-11 w-11 items-center justify-center rounded-lg border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary)"
+            aria-label={link.label}
+          >
+            <Icon name={link.label === "LinkedIn" ? "linkedin" : "facebook"} class="h-4 w-4" />
+            <span class="sr-only">{link.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <nav aria-label="Nawigacja — stopka">
+      <p class="mb-4 text-xs font-bold uppercase tracking-wider text-(--color-text-muted)">
+        {footerColumns.navigation.title}
+      </p>
+      <ul class="space-y-3">
+        {footerColumns.navigation.links.map((link) => (
+          <li>
+            <a href={link.href} class="link-underline text-sm text-(--color-text-secondary) hover:text-(--color-primary)">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav aria-label="Oferta — stopka">
+      <p class="mb-4 text-xs font-bold uppercase tracking-wider text-(--color-text-muted)">
+        {footerColumns.offer.title}
+      </p>
+      <ul class="space-y-3">
+        {footerColumns.offer.links.slice(0, 6).map((link) => (
+          <li>
+            <a href={link.href} class="link-underline text-sm text-(--color-text-secondary) hover:text-(--color-primary)">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <p class="mb-4 text-xs font-bold uppercase tracking-wider text-(--color-text-muted)">
+        {footerColumns.contact.title}
+      </p>
+      <ul class="space-y-3 text-sm text-(--color-text-secondary)">
+        <li class="flex items-start gap-2">
+          <Icon name="map-pin" class="mt-0.5 h-4 w-4 flex-shrink-0 text-(--color-primary)" />
+          <span>{footerColumns.contact.address}</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="phone" class="h-4 w-4 flex-shrink-0 text-(--color-primary)" />
+          <a href={`tel:${footerColumns.contact.phone.replace(/\s/g, "")}`} class="link-underline hover:text-(--color-primary)">
+            {footerColumns.contact.phone}
+          </a>
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="mail" class="h-4 w-4 flex-shrink-0 text-(--color-primary)" />
+          <a href={`mailto:${footerColumns.contact.email}`} class="link-underline hover:text-(--color-primary)">
+            {footerColumns.contact.email}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </Container>
+
+  <div class="border-t border-(--color-border)">
+    <Container class="flex flex-col gap-4 py-6 text-xs text-(--color-text-muted) md:flex-row md:items-center md:justify-between">
+      <p>© {year} way-IT Łukasz Kufel. {footerColumns.legal.nip} · {footerColumns.legal.regon}</p>
+      <ul class="flex gap-6">
+        {footerColumns.legal.links.map((link) => (
+          <li>
+            <a href={link.href} class="link-underline hover:text-(--color-primary)">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </div>
+</footer>

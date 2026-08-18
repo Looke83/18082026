@@ -1,0 +1,58 @@
+---
+// 4-step collaboration process — horizontal stepper on desktop,
+// vertical timeline on mobile.
+import Container from "../layout/Container.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+const steps = [
+  {
+    number: "01",
+    title: "Kontakt",
+    description: "Piszesz lub dzwonisz — opisujesz potrzebę, a my ustalamy zakres rozmowy wstępnej.",
+  },
+  {
+    number: "02",
+    title: "Audyt i wycena",
+    description: "Analizujemy obecną infrastrukturę lub potrzeby i przygotowujemy konkretną, bezpłatną wycenę.",
+  },
+  {
+    number: "03",
+    title: "Wdrożenie",
+    description: "Realizujemy projekt zgodnie z harmonogramem — z bieżącą komunikacją na każdym etapie.",
+  },
+  {
+    number: "04",
+    title: "Wsparcie",
+    description: "Zostajemy przy Tobie — serwis, monitoring i pomoc techniczna po zakończeniu wdrożenia.",
+  },
+];
+---
+
+<section class="py-16 md:py-24 lg:py-32" data-od-id="process-steps" aria-labelledby="process-heading">
+  <Container>
+    <SectionHeading
+      eyebrow="Jak wygląda współpraca"
+      title="Cztery kroki od pierwszego kontaktu do wdrożenia"
+      align="center"
+      class="mx-auto"
+      data-od-id="process-heading"
+    />
+
+    <ol class="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      {steps.map((step, index) => (
+        <li class="relative flex flex-col" data-od-id={`process-step-${step.number}`}>
+          <div class="flex items-center gap-4 lg:flex-col lg:items-start lg:gap-0">
+            <span class="font-mono text-3xl font-bold text-(--color-primary-light) lg:mb-4 lg:text-4xl" aria-hidden="true">
+              {step.number}
+            </span>
+            <h3 class="text-lg font-semibold text-(--color-text-primary) lg:mt-0">{step.title}</h3>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-(--color-text-secondary)">{step.description}</p>
+          {index < steps.length - 1 && (
+            <span class="mt-6 hidden h-px w-full bg-(--color-border) lg:block" aria-hidden="true" />
+          )}
+        </li>
+      ))}
+    </ol>
+  </Container>
+</section>

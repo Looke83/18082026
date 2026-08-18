@@ -1,0 +1,174 @@
+---
+// Sticky header: logo, primary nav (desktop) + mega menu on "Oferta",
+// theme toggle, header CTA, and the mobile menu island on small screens.
+import Container from "./Container.astro";
+import MegaMenu from "./MegaMenu.astro";
+import MobileMenu from "./MobileMenu.astro";
+import Button from "../ui/Button.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
+import { primaryNav, headerCta } from "../../data/navigation";
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-transparent bg-(--color-background)/80 backdrop-blur-md transition-all duration-300 ease-in-out"
+  data-od-id="site-header"
+>
+  <Container
+    as="nav"
+    class="relative flex h-18 items-center justify-between gap-4 py-3"
+  >
+    <a
+      href="/"
+      class="flex items-center gap-2 font-heading text-xl font-bold tracking-tight text-(--color-text-primary)"
+      data-od-id="logo"
+    >
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-lg bg-(--color-primary) text-(--color-primary-fg)"
+        >w</span
+      >
+      way-IT
+    </a>
+
+    <ul class="hidden items-center gap-8 lg:flex" role="menubar">
+      {
+        primaryNav.map((link) => (
+          <li class="group relative" role="none">
+            {link.label === "Oferta" ? (
+              <div data-mega-trigger>
+                <button
+                  type="button"
+                  class="link-underline flex items-center gap-1.5 py-2 text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary)"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-od-id="nav-oferta"
+                >
+                  {link.label}
+                  <svg
+                    class="h-4 w-4 transition-transform duration-200"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <MegaMenu />
+              </div>
+            ) : (
+              <a
+                href={link.href}
+                class="link-underline py-2 text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary)"
+                data-od-id={`nav-${link.label.toLowerCase()}`}
+              >
+                {link.label}
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <Button
+        href={headerCta.href}
+        variant="primary"
+        size="sm"
+        class="hidden lg:inline-flex"
+        data-od-id="header-cta"
+      >
+        {headerCta.label}
+      </Button>
+      <MobileMenu />
+    </div>
+  </Container>
+</header>
+
+<script>
+  // Header shadow/border on scroll + mega menu hover/focus behaviour + Hide-on-scroll.
+  const header = document.getElementById("site-header");
+  const trigger = document.querySelector<HTMLElement>("[data-mega-trigger]");
+  const megaButton = trigger?.querySelector("button");
+  const megaPanel = trigger?.querySelector<HTMLElement>("[data-mega-panel]");
+
+  let closeTimer: number | undefined;
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateHeader() {
+    if (!header) return;
+
+    const currentScrollY = window.scrollY;
+
+    // Obramowanie i cień
+    header.classList.toggle("border-(--color-border)", currentScrollY > 8);
+    header.classList.toggle("shadow-sm", currentScrollY > 8);
+
+    // Chowanie / wysuwanie (Hide-on-scroll)
+    if (document.body.classList.contains("menu-open")) {
+      ticking = false;
+      return;
+    }
+
+    if (currentScrollY <= 50) {
+      header.classList.remove("-translate-y-full");
+    } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      header.classList.add("-translate-y-full");
+    } else if (currentScrollY < lastScrollY) {
+      header.classList.remove("-translate-y-full");
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  updateHeader();
+
+  // Mega menu handlers
+  function openMega() {
+    if (!megaPanel || !megaButton) return;
+    window.clearTimeout(closeTimer);
+    megaPanel.dataset.open = "true";
+    megaButton.setAttribute("aria-expanded", "true");
+    megaButton.querySelector("svg")?.classList.add("rotate-180");
+  }
+
+  function closeMega() {
+    if (!megaPanel || !megaButton) return;
+    megaPanel.dataset.open = "false";
+    megaButton.setAttribute("aria-expanded", "false");
+    megaButton.querySelector("svg")?.classList.remove("rotate-180");
+  }
+
+  function scheduleClose() {
+    closeTimer = window.setTimeout(closeMega, 150);
+  }
+
+  trigger?.addEventListener("mouseenter", openMega);
+  trigger?.addEventListener("mouseleave", scheduleClose);
+  megaButton?.addEventListener("focus", openMega);
+  megaButton?.addEventListener("click", () => {
+    megaPanel?.dataset.open === "true" ? closeMega() : openMega();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMega();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (trigger && !trigger.contains(e.target as Node)) closeMega();
+  });
+</script>

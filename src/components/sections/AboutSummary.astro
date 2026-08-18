@@ -1,0 +1,59 @@
+---
+// Short company summary + link to the full /o-nas page. Two-column
+// split: copy + a small credibility panel (SVG-based, no stock photo).
+import Container from "../layout/Container.astro";
+import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
+---
+
+<section class="border-t border-(--color-border) py-16 md:py-24 lg:py-32" data-od-id="about-summary" aria-labelledby="about-heading">
+  <Container class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-4">O nas</p>
+      <h2 id="about-heading" class="text-3xl font-bold tracking-tight text-(--color-text-primary) md:text-4xl">
+        way-IT to zespół, który zna IT od strony sprzętu i od strony biznesu
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-(--color-text-secondary)">
+        Łukasz Kufel i zespół way-IT łączą kompetencje twardej infrastruktury — serwerów, sieci,
+        systemów bezpieczeństwa i urządzeń fiskalnych — z nowoczesnym podejściem do stron i
+        sklepów internetowych. Efekt: jeden partner technologiczny, który rozumie zarówno
+        serwerownię, jak i front sklepu.
+      </p>
+      <Button href="/o-nas" variant="outline" class="mt-8" data-od-id="about-summary-cta">
+        Poznaj naszą historię
+      </Button>
+    </div>
+
+    <div class="card-surface p-8 md:p-10" data-od-id="about-summary-panel">
+      <ul class="space-y-6">
+        <li class="flex items-start gap-4">
+          <span class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-(--color-primary-light) text-(--color-primary)">
+            <Icon name="server" class="h-5 w-5" />
+          </span>
+          <div>
+            <p class="font-semibold text-(--color-text-primary)">Zaplecze techniczne</p>
+            <p class="mt-1 text-sm text-(--color-text-secondary)">Serwery, sieci i systemy bezpieczeństwa jako codzienna praktyka, nie dodatek do umowy.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-(--color-accent-light) text-(--color-accent)">
+            <Icon name="code" class="h-5 w-5" />
+          </span>
+          <div>
+            <p class="font-semibold text-(--color-text-primary)">Nowoczesny web</p>
+            <p class="mt-1 text-sm text-(--color-text-secondary)">Strony i sklepy zbudowane pod wydajność, SEO i wygodę codziennej edycji treści.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4">
+          <span class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-(--color-primary-light) text-(--color-primary)">
+            <Icon name="pos" class="h-5 w-5" />
+          </span>
+          <div>
+            <p class="font-semibold text-(--color-text-primary)">Zgodność formalna</p>
+            <p class="mt-1 text-sm text-(--color-text-secondary)">Fiskalizacja i przeglądy zgodne z aktualnymi wymogami prawnymi — bez niespodzianek.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </Container>
+</section>

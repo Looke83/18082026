@@ -1,0 +1,236 @@
+---
+// Above-the-fold hero: headline, subtitle, primary/secondary CTA and an
+// abstract network illustration (inline SVG — no external image asset).
+import Container from "../layout/Container.astro";
+import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
+---
+
+<section
+  class="section-glow-hero relative overflow-hidden pt-14 pb-20 md:pt-20 md:pb-28 lg:pb-32"
+  data-od-id="hero"
+  aria-label="Wprowadzenie"
+>
+  <Container
+    class="relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8"
+  >
+    <div>
+      <p class="eyebrow mb-5" data-od-id="hero-eyebrow">way-IT Łukasz Kufel</p>
+      <h1
+        class="max-w-xl text-3xl font-bold tracking-tight text-(--color-text-primary) sm:text-4xl lg:text-5xl"
+        data-od-id="hero-title"
+      >
+        Infrastruktura, oprogramowanie i bezpieczeństwo dla Twojego biznesu.
+      </h1>
+      <p
+        class="mt-6 max-w-lg text-lg leading-relaxed text-(--color-text-secondary)"
+        data-od-id="hero-subtitle"
+      >
+        Obsługujemy infrastrukturę IT, budujemy strony i sklepy internetowe,
+        montujemy systemy monitoringu i alarmowe oraz wdrażamy urządzenia
+        fiskalne. Zamiast kilku dostawców — jeden zespół, który rozumie całą
+        Twoją firmę.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <Button
+          href="/kontakt"
+          variant="primary"
+          size="lg"
+          data-od-id="hero-cta-primary"
+        >
+          Bezpłatna wycena
+        </Button>
+        <Button
+          href="/#oferta"
+          variant="ghost"
+          size="lg"
+          data-od-id="hero-cta-secondary"
+        >
+          Zobacz ofertę
+          <Icon name="arrow-right" class="h-4 w-4" />
+        </Button>
+      </div>
+
+      <ul
+        class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-(--color-text-secondary)"
+      >
+        <li class="flex items-center gap-2">
+          <Icon
+            name="check"
+            class="h-4 w-4 flex-shrink-0 text-(--color-accent)"
+          />
+          Monitoring infrastruktury 24/7
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon
+            name="check"
+            class="h-4 w-4 flex-shrink-0 text-(--color-accent)"
+          />
+          Wsparcie zdalne i na miejscu
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon
+            name="check"
+            class="h-4 w-4 flex-shrink-0 text-(--color-accent)"
+          />
+          Umowy SLA z gwarantowanym czasem reakcji
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="relative mx-auto w-full max-w-md lg:max-w-none"
+      data-od-id="hero-visual"
+    >
+      <svg
+        viewBox="0 0 480 480"
+        class="h-auto w-full"
+        role="img"
+        aria-label="Abstrakcyjna wizualizacja sieci technologicznej"
+      >
+        <defs>
+          <radialGradient id="heroGlow" cx="50%" cy="35%" r="65%">
+            <stop
+              offset="0%"
+              stop-color="var(--color-primary)"
+              stop-opacity="0.16"></stop>
+            <stop
+              offset="100%"
+              stop-color="var(--color-primary)"
+              stop-opacity="0"></stop>
+          </radialGradient>
+          <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--color-primary)"></stop>
+            <stop offset="100%" stop-color="var(--color-accent)"></stop>
+          </linearGradient>
+        </defs>
+        <circle cx="240" cy="200" r="220" fill="url(#heroGlow)"></circle>
+        <g
+          fill="none"
+          stroke="url(#heroLine)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          opacity="0.7"
+        >
+          <path d="M90 340 210 230 240 300 360 150"></path>
+          <path d="M120 120 210 230 330 260 400 190"></path>
+          <path d="M210 230 90 150"></path>
+        </g>
+        <g>
+          <circle cx="90" cy="340" r="7" fill="var(--color-primary)"></circle>
+          <circle cx="210" cy="230" r="10" fill="var(--color-primary)"></circle>
+          <circle cx="240" cy="300" r="6" fill="var(--color-accent)"></circle>
+          <circle cx="360" cy="150" r="8" fill="var(--color-primary)"></circle>
+          <circle cx="120" cy="120" r="6" fill="var(--color-accent)"></circle>
+          <circle cx="330" cy="260" r="6" fill="var(--color-primary)"></circle>
+          <circle cx="400" cy="190" r="9" fill="var(--color-accent)"></circle>
+          <circle cx="90" cy="150" r="5" fill="var(--color-primary)"></circle>
+        </g>
+        <rect
+          x="150"
+          y="120"
+          width="180"
+          height="130"
+          rx="16"
+          fill="var(--color-background)"
+          stroke="var(--color-border)"
+          opacity="0.9"></rect>
+        <rect
+          x="172"
+          y="146"
+          width="136"
+          height="10"
+          rx="5"
+          fill="var(--color-primary-light)"></rect>
+        <rect
+          x="172"
+          y="168"
+          width="96"
+          height="10"
+          rx="5"
+          fill="var(--color-surface-alt)"></rect>
+        <rect
+          x="172"
+          y="190"
+          width="116"
+          height="10"
+          rx="5"
+          fill="var(--color-surface-alt)"></rect>
+        <rect
+          x="172"
+          y="216"
+          width="60"
+          height="18"
+          rx="9"
+          fill="var(--color-primary)"></rect>
+      </svg>
+
+      <div
+        class="absolute bottom-2 left-2 flex items-center gap-2 rounded-xl border border-(--color-border) bg-(--color-background)/90 px-4 py-3 shadow-lg backdrop-blur-sm sm:bottom-4 sm:left-4"
+      >
+        <span
+          class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-(--color-accent-light) text-(--color-accent)"
+        >
+          <Icon name="shield-check" class="h-4.5 w-4.5" />
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-(--color-text-primary)">
+            Monitoring 24/7
+          </p>
+          <p class="text-xs text-(--color-text-muted)">Serwery, sieć, kamery</p>
+        </div>
+      </div>
+
+      <div
+        class="absolute right-2 top-2 flex items-center gap-2 rounded-xl border border-(--color-border) bg-(--color-background)/90 px-4 py-3 shadow-lg backdrop-blur-sm sm:right-4 sm:top-4"
+      >
+        <span
+          class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-(--color-primary-light) text-(--color-primary)"
+        >
+          <Icon name="clock" class="h-4.5 w-4.5" />
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-(--color-text-primary)">
+            SLA na czas reakcji
+          </p>
+          <p class="text-xs text-(--color-text-muted)">Gwarancja umowna</p>
+        </div>
+      </div>
+
+      <div
+        class="absolute left-2 top-25 flex items-center gap-2 rounded-xl border border-(--color-border) bg-(--color-background)/90 px-4 py-3 shadow-lg backdrop-blur-sm sm:left-4 sm:top-15"
+      >
+        <span
+          class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-(--color-primary-light) text-(--color-primary)"
+        >
+          <Icon name="code" class="h-4.5 w-4.5" />
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-(--color-text-primary)">
+            Strony i sklepy internetowe
+          </p>
+          <p class="text-xs text-(--color-text-muted)">Projekt i wykonanie</p>
+        </div>
+      </div>
+
+      <div
+        class="absolute bottom-24 right-2 flex items-center gap-2 rounded-xl border border-(--color-border) bg-(--color-background)/90 px-4 py-3 shadow-lg backdrop-blur-sm sm:bottom-16 sm:right-4"
+      >
+        <span
+          class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-(--color-accent-light) text-(--color-accent)"
+        >
+          <Icon name="cart" class="h-4.5 w-4.5" />
+        </span>
+        <div>
+          <p class="text-sm font-semibold text-(--color-text-primary)">
+            ERP Berberis
+          </p>
+          <p class="text-xs text-(--color-text-muted)">
+            Kompleksowe wdrożenie i szkolenia
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

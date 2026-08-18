@@ -1,0 +1,45 @@
+---
+import { megaMenuColumns } from "../../data/navigation";
+import { categoryIcons } from "../../data/services";
+import Icon from "../ui/Icon.astro";
+---
+
+<div
+  data-mega-panel
+  data-open="false"
+  class="absolute left-1/2 top-full z-40 hidden w-screen -translate-x-1/2 pt-3 lg:block"
+  role="menu"
+  aria-label="Oferta — podkategorie"
+>
+  <div class="mx-auto max-w-[1440px] px-12">
+    <div class="card-surface grid grid-cols-4 gap-8 rounded-2xl p-8 shadow-lg">
+      {
+        megaMenuColumns.map((col) => (
+          <div>
+            <div class="mb-4 flex items-center gap-2">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-(--color-primary-light) text-(--color-primary)">
+                <Icon name={categoryIcons[col.category]} class="h-4 w-4" />
+              </span>
+              <p class="text-xs font-bold uppercase tracking-wider text-(--color-text-muted)">
+                {col.title}
+              </p>
+            </div>
+            <ul class="space-y-2.5">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    role="menuitem"
+                    class="link-underline text-sm text-(--color-text-secondary) hover:text-(--color-primary)"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

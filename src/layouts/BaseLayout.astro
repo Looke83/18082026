@@ -1,0 +1,52 @@
+---
+// Shared page shell: fonts, global styles, theme bootstrap, header/footer.
+// Every page in src/pages/* wraps its content in this layout.
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/600.css";
+import "../styles/global.css";
+import SEOHead from "../components/seo/SEOHead.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, path, ogImage, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <SEOHead title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} />
+    <script is:inline>
+      // Runs before first paint — prevents a flash of the wrong theme.
+      (function () {
+        var stored = localStorage.getItem("way-it-theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var isDark = stored ? stored === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+      })();
+    </script>
+  </head>
+  <body class="bg-(--color-background) text-(--color-text-primary) antialiased">
+    <a
+      href="#content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-(--color-primary) focus:px-4 focus:py-2 focus:text-(--color-primary-fg)"
+    >
+      Przejdź do treści
+    </a>
+    <Header />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

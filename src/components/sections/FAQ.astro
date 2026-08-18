@@ -1,0 +1,47 @@
+---
+// Frequently asked questions — built on the shared Accordion primitive.
+import Container from "../layout/Container.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Accordion from "../ui/Accordion.astro";
+import type { AccordionItem } from "../ui/Accordion.astro";
+
+const faqItems: AccordionItem[] = [
+  {
+    question: "Jak szybko reagujecie na zgłoszenia serwisowe?",
+    answer:
+      "Czas reakcji określa umowa SLA dopasowana do zakresu współpracy — standardowo odpowiadamy na zgłoszenia priorytetowe w ciągu kilku godzin roboczych.",
+  },
+  {
+    question: "Czy obsługujecie firmy poza Krakowem?",
+    answer:
+      "Tak — wsparcie zdalne świadczymy w całej Polsce, a serwis stacjonarny realizujemy w Krakowie i najbliższych okolicach.",
+  },
+  {
+    question: "Czy mogę zamówić tylko jedną usługę, np. samą stronę internetową?",
+    answer:
+      "Oczywiście. Każdą z usług — stronę, sklep, monitoring czy fiskalizację — można zamówić osobno, bez konieczności podpisywania pełnej umowy na obsługę IT.",
+  },
+  {
+    question: "Czy wystawiacie faktury i podpisujecie umowy serwisowe?",
+    answer:
+      "Tak, każda współpraca jest potwierdzona umową i rozliczana na podstawie faktury VAT zgodnie z obowiązującymi przepisami.",
+  },
+  {
+    question: "Ile trwa wdrożenie systemu kasowego POS lub fiskalizacja urządzenia?",
+    answer:
+      "Standardowe wdrożenie, wraz z konfiguracją i fiskalizacją, zajmuje zwykle od kilku dni do dwóch tygodni — zależnie od zakresu integracji z magazynem.",
+  },
+];
+---
+
+<section class="py-16 md:py-24 lg:py-32" data-od-id="faq" aria-labelledby="faq-heading">
+  <Container class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+    <SectionHeading
+      eyebrow="FAQ"
+      title="Najczęściej zadawane pytania"
+      description="Nie znalazłeś odpowiedzi na swoje pytanie? Napisz do nas — odpowiadamy w ciągu jednego dnia roboczego."
+      data-od-id="faq-heading"
+    />
+    <Accordion items={faqItems} data-od-id="faq-accordion" />
+  </Container>
+</section>

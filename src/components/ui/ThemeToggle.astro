@@ -1,0 +1,50 @@
+---
+// Light/Dark theme switch. Persists the choice in localStorage and
+// respects `prefers-color-scheme` as the initial default. The class
+// `.dark` on <html> is applied by the inline script in BaseLayout
+// *before* paint to avoid a flash of the wrong theme — this island
+// only needs to toggle it afterwards and swap the icon.
+import Icon from "./Icon.astro";
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="relative flex h-11 w-11 items-center justify-center rounded-lg text-(--color-text-primary) hover:bg-(--color-surface-alt) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-primary)"
+  aria-label="Przełącz motyw jasny/ciemny"
+  aria-pressed="false"
+  data-od-id="theme-toggle"
+>
+  <Icon name="sun" class="theme-icon-light h-5 w-5" />
+  <Icon name="moon" class="theme-icon-dark absolute h-5 w-5" />
+</button>
+
+<style>
+  #theme-toggle .theme-icon-dark {
+    display: none;
+  }
+  html.dark #theme-toggle .theme-icon-light {
+    display: none;
+  }
+  html.dark #theme-toggle .theme-icon-dark {
+    display: block;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+
+  function currentIsDark(): boolean {
+    return document.documentElement.classList.contains("dark");
+  }
+
+  function applyTheme(isDark: boolean) {
+    document.documentElement.classList.toggle("dark", isDark);
+    document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+    toggle?.setAttribute("aria-pressed", String(isDark));
+    localStorage.setItem("way-it-theme", isDark ? "dark" : "light");
+  }
+
+  toggle?.addEventListener("click", () => applyTheme(!currentIsDark()));
+  toggle?.setAttribute("aria-pressed", String(currentIsDark()));
+</script>

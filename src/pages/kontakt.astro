@@ -1,0 +1,27 @@
+---
+// Contact page — reuses the ContactForm section as the primary content.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/layout/Container.astro";
+import ContactForm from "../components/sections/ContactForm.astro";
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Skontaktuj się z way-IT Łukasz Kufel — bezpłatna wycena obsługi informatycznej, stron internetowych, monitoringu i systemów fiskalnych."
+  path="/kontakt"
+>
+  <section class="section-glow-hero pt-14 pb-8 md:pt-20 md:pb-10" data-od-id="contact-hero" aria-labelledby="contact-hero-heading">
+    <Container class="max-w-3xl">
+      <p class="eyebrow mb-4">Kontakt</p>
+      <h1 id="contact-hero-heading" class="text-4xl font-bold tracking-tight text-(--color-text-primary) sm:text-5xl">
+        Umów bezpłatną konsultację
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-(--color-text-secondary)">
+        Opisz krótko swoją sytuację, a odezwiemy się w ciągu jednego dnia roboczego z propozycją
+        dalszych kroków — bez zobowiązań.
+      </p>
+    </Container>
+  </section>
+
+  <ContactForm />
+</BaseLayout>

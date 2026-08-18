@@ -1,0 +1,59 @@
+---
+// Client testimonials grid — clearly labeled as illustrative placeholder
+// copy until real client quotes are supplied.
+import Container from "../layout/Container.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../ui/Icon.astro";
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Od momentu przejęcia obsługi IT przez way-IT przestaliśmy się martwić o serwery — awarie zdarzają się rzadko, a jeśli już, reakcja jest błyskawiczna.",
+    name: "Placeholder — dane referencyjne klienta",
+    role: "Właściciel, firma handlowa",
+  },
+  {
+    quote:
+      "Sklep internetowy wdrożony przez zespół way-IT działa szybko i jest prosty w codziennej edycji. Wsparcie po starcie też jest na wysokim poziomie.",
+    name: "Placeholder — dane referencyjne klienta",
+    role: "Kierownik e-commerce",
+  },
+  {
+    quote:
+      "Montaż monitoringu i systemu alarmowego przebiegł sprawnie, a serwis odpowiada na zgłoszenia dużo szybciej niż nasz wcześniejszy dostawca.",
+    name: "Placeholder — dane referencyjne klienta",
+    role: "Zarządca obiektu",
+  },
+];
+---
+
+<section class="bg-(--color-surface) py-16 md:py-24 lg:py-32" data-od-id="testimonials" aria-labelledby="testimonials-heading">
+  <Container>
+    <SectionHeading
+      eyebrow="Opinie klientów"
+      title="Co mówią firmy, które nam zaufały"
+      data-od-id="testimonials-heading"
+    />
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {testimonials.map((t, index) => (
+        <figure class="card-surface flex flex-col p-6 md:p-8" data-od-id={`testimonial-${index}`}>
+          <Icon name="quote" class="h-6 w-6 text-(--color-primary-light)" aria-hidden="true" />
+          <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-(--color-text-secondary)">
+            "{t.quote}"
+          </blockquote>
+          <figcaption class="mt-6 border-t border-(--color-border) pt-4">
+            <p class="text-sm font-semibold text-(--color-text-primary)">{t.name}</p>
+            <p class="text-xs text-(--color-text-muted)">{t.role}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </Container>
+</section>
