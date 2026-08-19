@@ -1,8 +1,11 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
 export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export interface Props {
+// Łączymy atrybuty <a> oraz <button>, aby Props przyjmował wszystkie opcjonalne właściwości HTML
+export type Props = (HTMLAttributes<"a"> & HTMLAttributes<"button">) & {
   variant?: ButtonVariant;
   size?: ButtonSize;
   href?: string;
@@ -10,9 +13,7 @@ export interface Props {
   class?: string;
   target?: string;
   rel?: string;
-  "aria-label"?: string;
-  "data-od-id"?: string;
-}
+};
 
 const {
   variant = "primary",
@@ -48,12 +49,14 @@ const variants: Record<ButtonVariant, string> = {
 const classes = [base, sizes[size], variants[variant], className].join(" ");
 ---
 
-{href ? (
-  <a href={href} class={classes} target={target} rel={rel} {...rest}>
-    <slot />
-  </a>
-) : (
-  <button type={type} class={classes} {...rest}>
-    <slot />
-  </button>
-)}
+{
+  href ? (
+    <a href={href} class={classes} target={target} rel={rel} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}
