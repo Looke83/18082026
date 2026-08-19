@@ -1,5 +1,5 @@
 ---
-// Two-column contact block: form (posts to /api/contact) + company
+// Two-column contact block: form (posts to /api/contact.php) + company
 // details and an embedded map. Client-side validation via a small
 // island script; no framework dependency.
 import Container from "../layout/Container.astro";
@@ -28,10 +28,26 @@ import { footerColumns } from "../../data/navigation";
         id="contact-form"
         class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2"
         method="post"
-        action="/api/contact"
+        action="/api/contact.php"
         novalidate
         data-od-id="contact-form"
       >
+        <!-- HONEYPOT FIELD - pułapka na boty -->
+        <div
+          class="sr-only aria-hidden:true"
+          aria-hidden="true"
+          style="display:none !important;"
+        >
+          <label for="cf-website">Nie wypełniaj tego pola</label>
+          <input
+            id="cf-website"
+            name="website"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
         <div class="flex flex-col gap-2">
           <label
             for="cf-name"
@@ -125,6 +141,7 @@ import { footerColumns } from "../../data/navigation";
             size="lg"
             class="w-full sm:w-auto"
             data-od-id="contact-form-submit"
+            id="contact-form-btn"
           >
             Wyślij zapytanie
           </Button>
@@ -189,12 +206,6 @@ import { footerColumns } from "../../data/navigation";
           class="h-64 w-full grayscale-[15%]"
           loading="lazy"
           referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <!--        <iframe
-          title="Lokalizacja way-IT na mapie"
-          src="https://www.google.com/maps?q=Krak%C3%B3w&output=embed"
-          class="h-64 w-full grayscale-[15%]"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe> -->
       </div>
     </div>
   </Container>
@@ -205,30 +216,58 @@ import { footerColumns } from "../../data/navigation";
     "contact-form",
   ) as HTMLFormElement | null;
   const status = document.getElementById("contact-form-status");
+  const submitBtn = document.getElementById(
+    "contact-form-btn",
+  ) as HTMLButtonElement | null;
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    if (status) status.textContent = "Wysyłanie...";
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (status) {
+      status.textContent = "Wysyłanie...";
+      status.className = "mt-3 text-sm text-(--color-text-secondary)";
+    }
 
     try {
       const formData = new FormData(form);
-      const response = await fetch("/api/contact", {
+      const actionUrl = form.getAttribute("action") || "/api/contact.php";
+
+      const response = await fetch(actionUrl, {
         method: "POST",
         body: formData,
+        headers: {
+          Accept: "application/json",
+        },
       });
-      if (!response.ok) throw new Error("request-failed");
-      if (status)
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.message || "Błąd serwera");
+      }
+
+      if (status) {
         status.textContent =
+          result.message ||
           "Dziękujemy! Odpowiemy w ciągu jednego dnia roboczego.";
+        status.className = "mt-3 text-sm text-green-600 font-medium";
+      }
       form.reset();
-    } catch {
-      if (status)
+    } catch (err: any) {
+      if (status) {
         status.textContent =
-          "Nie udało się wysłać wiadomości. Spróbuj ponownie lub zadzwoń do nas.";
+          err.message ||
+          "Nie udało się wysłać wiadomości. Spróbuj ponownie lub skontaktuj się bezpośrednio.";
+        status.className = "mt-3 text-sm text-red-600 font-medium";
+      }
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 </script>
