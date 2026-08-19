@@ -67,6 +67,6 @@ export const footerColumns = {
 };
 
 export const socialLinks: NavLink[] = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
+ // { label: "LinkedIn", href: "https://linkedin.com" },
   { label: "Facebook", href: "https://www.facebook.com/wayit.poznan/" },
 ];

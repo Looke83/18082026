@@ -59,10 +59,10 @@ export const categoryLabels: Record<ServiceCategory, string> = {
 };
 
 export const categoryDescriptions: Record<ServiceCategory, string> = {
-  it: "Kompleksowa opieka informatyczna i solidna infrastruktura, na której można polegać.",
+  it: "Kompleksowa opieka informatyczna i sprzętowa, na której można polegać.",
   web: "Strony i sklepy internetowe zaprojektowane pod konwersję i wygodne zarządzanie.",
   security: "Monitoring i systemy alarmowe chroniące ludzi i majątek firmy.",
-  fiscal: "Urządzenia i systemy fiskalne z pełnym serwisem i wsparciem.",
+  fiscal: "Urządzenia fiskalne i systemy POS z pełnym serwisem i wsparciem.",
 };
 
 export const categoryIcons: Record<ServiceCategory, IconName> = {
@@ -188,7 +188,7 @@ export const services: Service[] = [
     title: "Monitoring CCTV",
     shortDescription: "Projektowanie i montaż systemów kamer.",
     description:
-      "Projektujemy i montujemy systemy monitoringu wizyjnego CCTV dostosowane do obiektów firmowych i przemysłowych — z podglądem zdalnym i archiwizacją nagrań.",
+      "Projektujemy i montujemy systemy monitoringu wizyjnego CCTV dostosowane do obiektów firmowych, przemysłowych, a także domów jedno i wielorodzinnych — z podglądem zdalnym i archiwizacją nagrań.",
     category: "security",
     icon: "cctv",
     features: [
@@ -201,9 +201,9 @@ export const services: Service[] = [
   {
     slug: "systemy-alarmowe",
     title: "Systemy alarmowe SSWiN",
-    shortDescription: "Sygnalizacja włamania i napadu dla firm.",
+    shortDescription: "Sygnalizacja włamania i napadu dla firm i osób prywatnych.",
     description:
-      "Wdrażamy systemy sygnalizacji włamania i napadu (SSWiN) chroniące obiekty firmowe — z powiadomieniami w czasie rzeczywistym i integracją z monitoringiem grupy interwencyjnej.",
+      "Wdrażamy systemy sygnalizacji włamania i napadu (SSWiN) chroniące obiekty firmowe i prywatne — z powiadomieniami w czasie rzeczywistym i integracją z monitoringiem grupy interwencyjnej.",
     category: "security",
     icon: "alarm",
     features: [

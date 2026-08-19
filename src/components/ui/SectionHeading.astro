@@ -8,7 +8,14 @@ export interface Props {
   "data-od-id"?: string;
 }
 
-const { eyebrow, title, description, align = "left", class: className = "", ...rest } = Astro.props;
+const {
+  eyebrow,
+  title,
+  description,
+  align = "left",
+  class: className = "",
+  ...rest
+} = Astro.props;
 ---
 
 <div
@@ -20,6 +27,16 @@ const { eyebrow, title, description, align = "left", class: className = "", ...r
   {...rest}
 >
   {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
-  <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-(--color-text-primary)">{title}</h2>
-  {description && <p class="mt-4 text-lg text-(--color-text-secondary) leading-relaxed">{description}</p>}
+  <h2
+    class="text-3xl md:text-4xl font-bold tracking-tight text-(--color-text-primary)"
+  >
+    {title}
+  </h2>
+  {
+    description && (
+      <p class="mt-4 text-lg text-(--color-text-secondary) leading-relaxed">
+        {description}
+      </p>
+    )
+  }
 </div>

@@ -7,10 +7,11 @@ import WhyUs from "../components/sections/WhyUs.astro";
 import ProcessSteps from "../components/sections/ProcessSteps.astro";
 import AboutSummary from "../components/sections/AboutSummary.astro";
 //import Testimonials from "../components/sections/Testimonials.astro";
-//import LogosStrip from "../components/sections/LogosStrip.astro";
+import LogosStrip from "../components/sections/LogosStrip.astro";
 import FAQ from "../components/sections/FAQ.astro";
 import CTASection from "../components/sections/CTASection.astro";
 import ContactForm from "../components/sections/ContactForm.astro";
+import Brands from "../components/sections/Brands.astro";
 ---
 
 <BaseLayout
@@ -20,11 +21,12 @@ import ContactForm from "../components/sections/ContactForm.astro";
 >
   <Hero />
   <ServicesGrid />
+  <Brands />
   <WhyUs />
   <ProcessSteps />
   <AboutSummary />
   <!-- <Testimonials /> -->
-  <!-- <LogosStrip /> -->
+  <LogosStrip />
   <FAQ />
   <CTASection />
   <ContactForm />

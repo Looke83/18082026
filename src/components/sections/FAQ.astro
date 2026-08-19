@@ -4,6 +4,7 @@ import Container from "../layout/Container.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Accordion from "../ui/Accordion.astro";
 import type { AccordionItem } from "../ui/Accordion.astro";
+import Button from "../ui/Button.astro";
 
 const faqItems: AccordionItem[] = [
   {
@@ -14,7 +15,7 @@ const faqItems: AccordionItem[] = [
   {
     question: "Czy obsługujecie firmy poza Poznaniem?",
     answer:
-      "Tak — wsparcie zdalne świadczymy w całej Polsce, a serwis stacjonarny realizujemy w Krakowie i najbliższych okolicach.",
+      "Tak — wsparcie zdalne świadczymy w całej Polsce, a serwis stacjonarny realizujemy w Poznaniu i najbliższych okolicach.",
   },
   {
     question:
@@ -42,12 +43,30 @@ const faqItems: AccordionItem[] = [
   aria-labelledby="faq-heading"
 >
   <Container class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-    <SectionHeading
-      eyebrow="FAQ"
-      title="Najczęściej zadawane pytania"
-      description="Nie znalazłeś odpowiedzi na swoje pytanie? Napisz do nas — odpowiadamy w ciągu jednego dnia roboczego."
-      data-od-id="faq-heading"
-    />
+    <!-- Lewa kolumna: Nagłówek + Przycisk -->
+    <div class="flex flex-col items-start justify-between">
+      <div>
+        <SectionHeading
+          eyebrow="FAQ"
+          title="Najczęściej zadawane pytania"
+          description="Nie znalazłeś odpowiedzi na swoje pytanie? Napisz do nas — odpowiadamy w ciągu jednego dnia roboczego."
+          data-od-id="faq-heading"
+        />
+
+        <div class="mt-8">
+          <Button
+            href="/kontakt"
+            variant="primary"
+            size="lg"
+            data-od-id="faq-cta"
+          >
+            Napisz do nas
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prawa kolumna: Accordion -->
     <Accordion items={faqItems} data-od-id="faq-accordion" />
   </Container>
 </section>
