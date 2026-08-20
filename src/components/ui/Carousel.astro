@@ -1,0 +1,160 @@
+---
+import { getImage } from "astro:assets";
+import Container from "../layout/Container.astro";
+
+export interface LogoItem {
+  name: string;
+  // Główne logo (dla jasnego tła lub uniwersalne)
+  src: ImageMetadata | string;
+  // Opcjonalne logo odwrócone (dla ciemnego tła)
+  srcLight?: ImageMetadata | string;
+}
+
+interface Props {
+  logos: LogoItem[];
+  title?: string;
+  speed?: string;
+  dataOdId?: string;
+  // Flaga wymuszająca odwrócony wariant kolorystyczny
+  forceDarkMode?: boolean;
+}
+
+const {
+  logos,
+  title,
+  speed = "25s",
+  dataOdId = "logos-strip",
+  forceDarkMode = false,
+} = Astro.props;
+
+// Przetwarzamy każdy obrazek przez getImage() z opcją fallbacku
+const processedLogos = await Promise.all(
+  logos.map(async (logo) => {
+    const processSrc = async (src: ImageMetadata | string | undefined) => {
+      if (!src) return undefined;
+      if (typeof src === "string") return src;
+
+      const optimized = await getImage({
+        src,
+        format: "webp",
+        quality: 80,
+      });
+      return optimized.src;
+    };
+
+    const mainSrc = await processSrc(logo.src);
+    // Jeśli brak srcLight, automatycznie podstawiamy główne logo
+    const lightSrc = logo.srcLight ? await processSrc(logo.srcLight) : mainSrc;
+
+    return {
+      name: logo.name,
+      src: mainSrc,
+      srcLight: lightSrc,
+      hasSeparateLight: Boolean(logo.srcLight),
+    };
+  }),
+);
+
+// Powielamy przetworzone logotypy na potrzeby płynnej pętli
+const marqueeLogos = [...processedLogos, ...processedLogos];
+---
+
+<section
+  class:list={[
+    "border-t border-(--color-border) py-12 md:py-16 overflow-hidden w-full",
+    { "dark-mode-carousel": forceDarkMode },
+  ]}
+  data-od-id={dataOdId}
+  aria-label={title || "Logotypy"}
+>
+  {
+    title && (
+      <Container>
+        <p class="mb-8 text-center text-xs font-semibold uppercase tracking-wider text-(--color-text-muted)">
+          {title}
+        </p>
+      </Container>
+    )
+  }
+
+  <div
+    class="relative w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+  >
+    <div
+      class="flex w-max animate-marquee items-center gap-12 md:gap-16 opacity-70 grayscale transition-all hover:grayscale-0"
+      style={`--marquee-speed: ${speed};`}
+    >
+      {
+        marqueeLogos.map((logo) => (
+          <div class="flex items-center justify-center min-w-[120px] md:min-w-[160px]">
+            {/* Logo dla jasnego tła */}
+            <img
+              src={logo.src}
+              alt={logo.name}
+              class:list={[
+                "h-8 md:h-16 w-auto object-contain",
+                { "logo-dark-version": logo.hasSeparateLight },
+              ]}
+              loading="lazy"
+              decoding="async"
+            />
+
+            {/* Logo dla ciemnego tła (tylko jeśli podano osobny plik srcLight) */}
+            {logo.hasSeparateLight && (
+              <img
+                src={logo.srcLight}
+                alt={`${logo.name} (light)`}
+                class="logo-light-version h-8 md:h-16 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee var(--marquee-speed) linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Domyślne sterowanie widocznością wariantów */
+  .logo-dark-version {
+    display: block;
+  }
+  .logo-light-version {
+    display: none;
+  }
+
+  /* Gdy wymuszono ciemny wariant na komponencie */
+  .dark-mode-carousel .logo-dark-version {
+    display: none;
+  }
+  .dark-mode-carousel .logo-light-version {
+    display: block;
+  }
+
+  /* Gdy strona używa globalnego motywu ciemnego (.dark na <html>/<body>) */
+  :global(.dark) section:not(.dark-mode-carousel) .logo-dark-version {
+    display: none;
+  }
+  :global(.dark) section:not(.dark-mode-carousel) .logo-light-version {
+    display: block;
+  }
+</style>

@@ -8,6 +8,22 @@ export type ServiceCategory =
   | "security"
   | "fiscal";
 
+export interface ServicePricingPlan {
+  name: string;
+  badge?: string;
+  description?: string;
+  price: string;
+  period?: string;
+  includesPreviousText?: string;
+  features: ({ text: string; included: boolean } | string)[];
+  highlighted?: boolean;
+}
+
+export interface ServicePricing {
+  title?: string;
+  subtitle?: string;
+  plans: ServicePricingPlan[];
+}
 export interface Service {
   slug: string;
   title: string;
@@ -150,6 +166,56 @@ export const services: Service[] = [
       "Optymalizacja pod SEO od pierwszego dnia",
       "Panel do samodzielnej edycji treści",
     ],
+    // DEDYKOWANY CENNIK DLA TEJ USŁUGI
+    pricing: {
+      title: "Pakiety wdrożeniowe stron WWW",
+      subtitle: "Przejrzyste warunki, bez ukrytych kosztów i powracających abonamentów.",
+      plans: [
+        {
+          name: "Start",
+          price: "2000",
+          description: "Idealna wizytówka dla małych firm i freelancerów.",
+          features: [
+            "Strona typu One-Page",
+            "Szybki czas wdrożenia",
+            "Formularz kontaktowy + mapa",
+            "Wersja RWD (Różne ekrany)",
+            "System Wordpress do edycji",
+          ],
+        },
+        {
+          name: "Biznes",
+          badge: "Polecany",
+          highlighted: true,
+          price: "3500",
+          description: "Rozbudowana strona firmowa nakierowana na zdobywanie klientów.",
+          includesPreviousText: "Wszystko co w pakiecie Start, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Do 8 podstron (O nas, Oferta, Kontakt itp.)",
+            "Dedykowany projekt graficzny",
+            "System CMS WordPress + Bricks Builder",
+            "Astro Framework - jeżeli nie potrzeba CMS",
+            "Optymalizacja szybkości (Core Web Vitals)",
+            "Podstawowa analityka GA4",
+          ],
+        },
+        {
+          name: "Pro",
+          price: "Wycena",
+          period: "indywidualna",
+          description: "Dedykowane portale i zaawansowane serwisy sieciowe.",
+          includesPreviousText: "Wszystko co w pakiecie Pro, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Nielimitowana liczba podstron",
+            "Integracje API / CRM",
+            "Wielojęzyczność (i18n)",
+            "Zaawansowana animacja i efekty Canvas",
+            "Szkolenie zespołu z obsługi",
+          ],
+          
+        },
+      ],
+    },
   },
   {
     slug: "sklepy-internetowe",
@@ -165,6 +231,55 @@ export const services: Service[] = [
       "Optymalizacja ścieżki zakupowej",
       "Wsparcie techniczne po uruchomieniu",
     ],
+    pricing: {
+      title: "Pakiety wdrożeniowe e-commerce",
+      subtitle: "Przejrzyste warunki, bez ukrytych kosztów i powracających abonamentów.",
+      plans: [
+        {
+          name: "Start e-commerce",
+          price: "3000",
+          description: "Podstawowy sklep internetowy.",
+          features: [
+            "System Woocommerce",
+            "Szybki czas wdrożenia",
+            "Formularz kontaktowy",
+            "Wersja RWD (Różne ekrany)",
+            "Oparty na szablonie graficznym",
+            "Integracja z płatnościami i kurierami",
+            "Do 4 kategorii produktów / 30 produktów - z możliwością rozbudowy",
+          ],
+        },
+        {
+          name: "Biznes e-commerce",
+          badge: "Polecany",
+          highlighted: true,
+          price: "6000",
+          description: "Rozbudowany sklep internetowy przygotowany do sprzedaży.",
+          includesPreviousText: "Wszystko co w pakiecie Start e-commerce, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Do 10 kategorii produktów / 100 produktów - z możliwością rozbudowy",
+            "Dedykowany projekt graficzny",
+            "Podłączenie GA4 i Consent Mode",
+            "Optymalizacja szybkości (Core Web Vitals)",
+          ],
+        },
+        {
+          name: "Pro",
+          price: "Wycena",
+          period: "indywidualna",
+          description: "Dedykowane sklepy internetowe dostosowane do Twoich potrzeb.",
+          includesPreviousText: "Wszystko co w pakiecie Pro e-commerce, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Nielimitowana liczba kategorii i produktów",
+            "Integracje API / CRM",
+            "Wielojęzyczność (i18n)",
+            "Zaawansowana animacja i efekty Canvas",
+            "Szkolenie zespołu z obsługi",
+          ],
+          
+        },
+      ],
+    },
   },
   {
     slug: "opieka-www",
@@ -180,6 +295,50 @@ export const services: Service[] = [
       "Drobne zmiany treści i funkcjonalności",
       "Szybki kontakt w razie awarii",
     ],
+    pricing: {
+      title: "Obsługa Wordpress",
+      subtitle: "Przejrzyste warunki, bez ukrytych kosztów i powracających abonamentów.",
+      plans: [
+        {
+          name: "Start",
+          price: "150",
+          period: "zł netto / mies.",
+          description: "Podstawowa opieka nad stroną.",
+          features: [
+            "Aktualizacja Wordpress 2x w miesiącu",
+            "Backup 1x w miesiącu",
+            "Skan antywirusowy 1x w miesiącu",         
+          ],
+        },
+        {
+          name: "Biznes",
+          badge: "Polecany",
+          highlighted: true,
+          price: "450",
+          description: "Rozbudowana opieka nad stroną.",
+          //includesPreviousText: "Wszystko co w pakiecie Start, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Aktualizacja Wordpress 4x w miesiącu",
+            "Backup 4x w miesiącu",
+            "Skan antywirusowy 4x w miesiącu",
+            "Monitoring dostępności strony 24/7",
+            "1h prac rozwojowych na stronie",
+            "Konfigracja i monitorowanie Litespeed Cache - jeżeli serwer obsługuje",
+          ],
+        },
+        {
+          name: "Pro",
+          price: "Wycena",
+          period: "indywidualna",
+          description: "Dedykowane portale i zaawansowane serwisy sieciowe.",
+          //includesPreviousText: "Wszystko co w pakiecie Pro e-commerce, plus:", // <--- OTO NAGŁÓWEK
+          features: [
+            "Dopasowany pakiet usług i oprogramowania na podstawie indywidualnych ustaleń i potrzeb klienta",
+          ],
+          
+        },
+      ],
+    },
   },
 
   // --- Kolumna 3: Bezpieczeństwo ---

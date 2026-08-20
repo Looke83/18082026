@@ -1,0 +1,157 @@
+---
+import Container from "../layout/Container.astro";
+
+export interface PricingFeature {
+  text: string;
+  included: boolean;
+}
+
+export interface PricingPlan {
+  name: string;
+  badge?: string;
+  description?: string;
+  price: string;
+  period?: string;
+  includesPreviusText?: string;
+  features: (string | PricingFeature)[];
+  hlighted?: boolean;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  plans: PricingPlan[];
+  dataOdId?: string;
+}
+
+const {
+  title = "Elastyczne pakiety dopasowane do Twoich potrzeb",
+  subtitle = "Wybierz zakres wsparcia IT, który najlepiej odpowiada skali Twojego biznesu.",
+  plans,
+  dataOdId = "pricing-section",
+} = Astro.props;
+---
+
+<section class="py-16 md:py-24 w-full" data-od-id={dataOdId}>
+  <Container>
+    {
+      (title || subtitle) && (
+        <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          {title && (
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-(--color-text) mb-4">
+              {title}
+            </h2>
+          )}
+          {subtitle && (
+            <p class="text-lg text-(--color-text-muted)">{subtitle}</p>
+          )}
+        </div>
+      )
+    }
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      {
+        plans.map((plan) => {
+          const isHighlighted = plan.highlighted ?? false;
+
+          return (
+            <div
+              class:list={[
+                "relative flex flex-col justify-between rounded-2xl p-8 transition-all duration-300",
+                isHighlighted
+                  ? "bg-(--color-bg-card, #18181b) border-2 border-primary shadow-xl shadow-primary/10 md:-translate-y-2"
+                  : "bg-(--color-bg-card-subtle, #09090b) border border-(--color-border) hover:border-primary/50",
+              ]}
+            >
+              {plan.badge && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span class="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
+                    {plan.badge}
+                  </span>
+                </div>
+              )}
+
+              <div>
+                <div class="mb-6">
+                  <h3 class="text-xl font-bold text-(--color-text)">
+                    {plan.name}
+                  </h3>
+                  {plan.description && (
+                    <p class="text-sm text-(--color-text-muted) mt-1 min-h-[40px]">
+                      {plan.description}
+                    </p>
+                  )}
+                </div>
+
+                <div class="flex items-baseline gap-1 mb-8 pb-6 border-b border-(--color-border)">
+                  <span class="text-4xl md:text-5xl font-extrabold tracking-tight text-(--color-text)">
+                    {plan.price}
+                  </span>
+                  <span class="text-sm font-medium text-(--color-text-muted)">
+                    {plan.period ?? "zł netto"}
+                  </span>
+                </div>
+                <!-- WARUNKOWY TEKST NAD LISTĄ -->
+                {plan.includesPreviousText && (
+                  <p class="text-xs font-semibold uppercase tracking-wider text-primary mb-4">
+                    {plan.includesPreviousText}
+                  </p>
+                )}
+                <ul class="space-y-4 mb-8">
+                  {plan.features.map((feature) => {
+                    const isObject = typeof feature === "object";
+                    const text = isObject ? feature.text : feature;
+                    const isIncluded = isObject ? feature.included : true;
+
+                    return (
+                      <li class="flex items-start gap-3 text-sm">
+                        {isIncluded ? (
+                          <svg
+                            class="w-5 h-5 text-primary shrink-0 mt-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            class="w-5 h-5 text-(--color-text-muted) opacity-40 shrink-0 mt-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        )}
+                        <span
+                          class:list={[
+                            isIncluded
+                              ? "text-(--color-text)"
+                              : "text-(--color-text-muted) line-through opacity-60",
+                          ]}
+                        >
+                          {text}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>

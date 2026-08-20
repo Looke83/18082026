@@ -8,10 +8,79 @@ import ProcessSteps from "../components/sections/ProcessSteps.astro";
 import AboutSummary from "../components/sections/AboutSummary.astro";
 //import Testimonials from "../components/sections/Testimonials.astro";
 import LogosStrip from "../components/sections/LogosStrip.astro";
+import Carousel from "../components/ui/Carousel.astro";
 import FAQ from "../components/sections/FAQ.astro";
 import CTASection from "../components/sections/CTASection.astro";
 import ContactForm from "../components/sections/ContactForm.astro";
 import Brands from "../components/sections/Brands.astro";
+
+//import obrazki z src/assets/ dla logotypów w sekcji LogosStrip
+import klimapozImg from "../assets/logos/klimapoz.webp";
+import alunaImg from "../assets/logos/aluna.webp";
+import bmsImg from "../assets/logos/bms.png";
+import huntersImg from "../assets/logos/hunters.webp";
+import maestroImg from "../assets/logos/maestro.png";
+import meduzaImg from "../assets/logos/meduza.png";
+
+//wersje jasne
+import bmsLightImg from "../assets/logos/bms-light.png";
+import maestroLightImg from "../assets/logos/maestro-light.png";
+
+//cennik
+import PricingGrid from "../components/sections/PricingGrid.astro";
+
+const partnerLogos = [
+  { name: "Klimapoz", src: klimapozImg },
+  { name: "Aluna", src: alunaImg },
+  { name: "BMS", src: bmsImg, srcLight: bmsLightImg },
+  { name: "Hunters", src: huntersImg },
+  { name: "Maestro", src: maestroImg, srcLight: maestroLightImg },
+  { name: "Meduza", src: meduzaImg },
+];
+
+const pricingPlans = [
+  {
+    name: "Normal",
+    description: "Podstawowa opieka i bezpieczeństwo dla małych stron.",
+    price: "150",
+    features: [
+      "Kopia zapasowa raz w miesiącu",
+      "2x w miesiącu aktualizacja WordPress",
+      "Podstawowy monitoring dostępności",
+      { text: "Dedykowany priorytet zgłoszeń", included: false },
+      { text: "Audyt bezpieczeństwa", included: false },
+    ],
+    buttonText: "Zamów Normal",
+  },
+  {
+    name: "Pro",
+    badge: "Najpopularniejszy",
+    highlighted: true,
+    description: "Pełne wsparcie techniczne dla rozwijających się firm.",
+    price: "350",
+    features: [
+      "Kopia zapasowa raz w tygodniu",
+      "Cotygodniowe aktualizacje WordPress i wtyczek",
+      "Monitoring dostępności 24/7",
+      "Reakcja na awarię do 4h",
+      { text: "Audyt bezpieczeństwa", included: false },
+    ],
+    buttonText: "Wybierz Pro",
+  },
+  {
+    name: "Business",
+    description: "Maksymalna ochrona i priorytetowe wsparcie serwisowe.",
+    price: "600",
+    features: [
+      "Codzienna kopia zapasowa (Cloud)",
+      "Aktualizacje na środowisku stagingowym",
+      "Monitoring dostępności 24/7 z SLA",
+      "Dedykowany priorytet zgłoszeń (SLA 1h)",
+      "Pełny audyt bezpieczeństwa raz w roku",
+    ],
+    buttonText: "Skontaktuj się",
+  },
+];
 ---
 
 <BaseLayout
@@ -26,8 +95,19 @@ import Brands from "../components/sections/Brands.astro";
   <ProcessSteps />
   <AboutSummary />
   <!-- <Testimonials /> -->
-  <LogosStrip />
+  <!--<LogosStrip /> -->
+  <Carousel
+    logos={partnerLogos}
+    title="Firmy, które nam zaufały"
+    speed="30s"
+    dataOdId="partner-logos"
+  />
   <FAQ />
   <CTASection />
   <ContactForm />
+  <PricingGrid
+    title="Pakiety opieki nad WordPress"
+    subtitle="Zabezpiecz swoją stronę i zyskaj spokój. Bez ukrytych kosztów."
+    plans={pricingPlans}
+  />
 </BaseLayout>
