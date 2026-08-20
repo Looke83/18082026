@@ -12,9 +12,9 @@ export interface PricingPlan {
   description?: string;
   price: string;
   period?: string;
-  includesPreviusText?: string;
+  includesPreviousText?: string;
   features: (string | PricingFeature)[];
-  hlighted?: boolean;
+  highlighted?: boolean;
 }
 
 interface Props {
@@ -52,7 +52,7 @@ const {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
       {
         plans.map((plan) => {
-          const isHighlighted = plan.highlighted ?? false;
+          const isHighlighted = (plan as any).highlighted ?? false;
 
           return (
             <div

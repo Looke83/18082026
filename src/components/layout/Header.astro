@@ -7,6 +7,8 @@ import MobileMenu from "./MobileMenu.astro";
 import Button from "../ui/Button.astro";
 import ThemeToggle from "../ui/ThemeToggle.astro";
 import { primaryNav, headerCta } from "../../data/navigation";
+import { Image } from "astro:assets";
+import logoImg from "../../assets/wayit.webp"; // Dostosuj ścieżkę do pliku
 ---
 
 <header
@@ -23,10 +25,7 @@ import { primaryNav, headerCta } from "../../data/navigation";
       class="flex items-center gap-2 font-heading text-xl font-bold tracking-tight text-(--color-text-primary)"
       data-od-id="logo"
     >
-      <span
-        class="flex h-9 w-9 items-center justify-center rounded-lg bg-(--color-primary) text-(--color-primary-fg)"
-        >w</span
-      >
+      <Image src={logoImg} alt="way-IT Logo" class="h-9 w-auto" />
       way-IT
     </a>
 

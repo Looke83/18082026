@@ -32,6 +32,7 @@ export interface Service {
   category: ServiceCategory;
   icon: IconName;
   features: string[];
+  pricing?: ServicePricing;
 }
 
 export type IconName =
