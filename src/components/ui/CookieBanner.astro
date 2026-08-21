@@ -2,46 +2,124 @@
 // src/components/ui/CookieBanner.astro
 ---
 
-<!-- GŁÓWNY BANER (Bottom bar) -->
+<!-- MODAL USTAWIEŃ -->
 <div
-  id="cookie-banner"
-  class="fixed bottom-0 left-0 right-0 z-50 p-4 transition-transform duration-300 translate-y-full"
+  id="cookie-settings-modal"
   style="display: none;"
+  class="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 p-3 backdrop-blur-sm w-screen h-screen overflow-hidden box-border"
 >
   <div
-    class="mx-auto max-w-4xl rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg, #ffffff)] dark:bg-[var(--color-card-surface, #18181b)] p-6 shadow-2xl backdrop-blur-md"
+    class="w-full max-w-md max-h-[85vh] overflow-y-auto rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg, #ffffff)] dark:bg-[var(--color-card-surface, #18181b)] p-4 sm:p-6 shadow-2xl box-border"
   >
-    <div
-      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+    <h3
+      class="mb-3 text-base sm:text-lg font-bold text-[var(--color-text-primary)]"
     >
+      Ustawienia plików cookies
+    </h3>
+
+    <div class="mb-5 divide-y divide-[var(--color-border)] text-xs sm:text-sm">
+      <div class="flex items-center justify-between py-2.5 gap-3">
+        <div class="pr-2">
+          <p class="font-medium text-[var(--color-text-primary)]">
+            Niezbędne (Wymagane)
+          </p>
+          <p class="text-[11px] text-[var(--color-text-secondary)]">
+            Kluczowe dla działania strony.
+          </p>
+        </div>
+        <input
+          type="checkbox"
+          checked
+          disabled
+          class="h-5 w-5 rounded accent-[#00A2E0] opacity-60 flex-shrink-0"
+        />
+      </div>
+
+      <div class="flex items-center justify-between py-2.5 gap-3">
+        <div class="pr-2">
+          <p class="font-medium text-[var(--color-text-primary)]">
+            Analityka (Google Analytics)
+          </p>
+          <p class="text-[11px] text-[var(--color-text-secondary)]">
+            Pomaga nam mierzyć wydajność serwisu.
+          </p>
+        </div>
+        <input
+          type="checkbox"
+          id="toggle-analytics"
+          class="h-5 w-5 rounded accent-[#00A2E0] cursor-pointer flex-shrink-0"
+        />
+      </div>
+
+      <div class="flex items-center justify-between py-2.5 gap-3">
+        <div class="pr-2">
+          <p class="font-medium text-[var(--color-text-primary)]">
+            Marketing i Reklamy
+          </p>
+          <p class="text-[11px] text-[var(--color-text-secondary)]">
+            Dostosowywanie treści reklamowych.
+          </p>
+        </div>
+        <input
+          type="checkbox"
+          id="toggle-ads"
+          class="h-5 w-5 rounded accent-[#00A2E0] cursor-pointer flex-shrink-0"
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2">
+      <button
+        type="button"
+        id="cookie-save-settings"
+        class="w-full rounded-xl bg-[#00A2E0] px-5 py-2.5 text-xs sm:text-sm font-medium text-white cursor-pointer"
+      >
+        Zapisz wybrane
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GŁÓWNY BANER -->
+<div
+  id="cookie-banner"
+  style="display: none; position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; z-index: 99998 !important;"
+  class="w-screen max-w-full p-3 box-border"
+>
+  <div
+    class="mx-auto max-w-xl w-[calc(100vw-24px)] rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg, #ffffff)] dark:bg-[var(--color-card-surface, #18181b)] p-4 shadow-2xl backdrop-blur-md box-border"
+  >
+    <div class="flex flex-col gap-3">
       <div
-        class="space-y-1 text-sm text-[var(--color-text-secondary, #4b5563)]"
+        class="space-y-1 text-xs sm:text-sm text-[var(--color-text-secondary, #4b5563)]"
       >
         <p class="font-semibold text-[var(--color-text-primary, #111827)]">
           Szanujemy Twoją prywatność
         </p>
         <p>
           Używamy plików cookies w celu analizy ruchu i optymalizacji działania
-          serwisu. Możesz zaakceptować wszystkie lub dostosować zgody w
-          ustawieniach.
+          serwisu.
         </p>
       </div>
-      <div class="flex flex-shrink-0 flex-wrap gap-2 md:gap-3">
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 pt-1">
         <button
+          type="button"
           id="cookie-settings-btn"
-          class="inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-border)]/20"
+          class="col-span-1 inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-transparent px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] cursor-pointer"
         >
           Ustawienia
         </button>
         <button
+          type="button"
           id="cookie-reject-all"
-          class="inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-border)]/20"
+          class="col-span-1 inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-transparent px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] cursor-pointer"
         >
           Tylko niezbędne
         </button>
         <button
+          type="button"
           id="cookie-accept-all"
-          class="inline-flex items-center justify-center rounded-xl bg-[#00A2E0] px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          class="col-span-2 sm:col-auto sm:flex-1 inline-flex items-center justify-center rounded-xl bg-[#00A2E0] px-4 py-2 text-xs font-medium text-white cursor-pointer"
         >
           Akceptuję wszystkie
         </button>
@@ -50,155 +128,64 @@
   </div>
 </div>
 
-<!-- MODAL USTAWIEŃ ZGÓD -->
-<div
-  id="cookie-settings-modal"
-  class="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
->
-  <div
-    class="w-full max-w-lg rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg, #ffffff)] dark:bg-[var(--color-card-surface, #18181b)] p-6 shadow-xl"
-  >
-    <h3 class="mb-4 text-xl font-bold text-[var(--color-text-primary)]">
-      Ustawienia plików cookies
-    </h3>
+<script is:inline>
+  (function () {
+    var banner = document.getElementById("cookie-banner");
+    var consent = localStorage.getItem("way_cookie_consent");
 
-    <div class="mb-6 divide-y divide-[var(--color-border)]">
-      <!-- Zgoda 1: Niezbędne -->
-      <div class="flex items-center justify-between py-3">
-        <div>
-          <p class="font-medium text-[var(--color-text-primary)]">
-            Niezbędne (Wymagane)
-          </p>
-          <p class="text-xs text-[var(--color-text-secondary)]">
-            Kluczowe dla podstawowego działania strony i bezpieczeństwa.
-          </p>
-        </div>
-        <input
-          type="checkbox"
-          checked
-          disabled
-          class="h-5 w-5 rounded accent-[#00A2E0] cursor-not-allowed opacity-60"
-        />
-      </div>
-
-      <!-- Zgoda 2: Analityka -->
-      <div class="flex items-center justify-between py-3">
-        <div>
-          <p class="font-medium text-[var(--color-text-primary)]">
-            Analityka (Google Analytics)
-          </p>
-          <p class="text-xs text-[var(--color-text-secondary)]">
-            Pomaga nam mierzyć i poprawiać wydajność serwisu.
-          </p>
-        </div>
-        <input
-          type="checkbox"
-          id="toggle-analytics"
-          class="h-5 w-5 rounded accent-[#00A2E0] cursor-pointer"
-        />
-      </div>
-
-      <!-- Zgoda 3: Reklamy -->
-      <div class="flex items-center justify-between py-3">
-        <div>
-          <p class="font-medium text-[var(--color-text-primary)]">
-            Marketing i Reklamy
-          </p>
-          <p class="text-xs text-[var(--color-text-secondary)]">
-            Dostosowywanie treści reklam do Twoich preferencji.
-          </p>
-        </div>
-        <input
-          type="checkbox"
-          id="toggle-ads"
-          class="h-5 w-5 rounded accent-[#00A2E0] cursor-pointer"
-        />
-      </div>
-    </div>
-
-    <div class="flex justify-end gap-3">
-      <button
-        id="cookie-save-settings"
-        class="rounded-xl bg-[#00A2E0] px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-      >
-        Zapisz wybrane
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Deklaracja typów dla globalnego obiektu window.gtag (naprawia błąd TypeScript podczas builda)
-  declare global {
-    interface Window {
-      gtag: (...args: any[]) => void;
+    if (!consent && banner) {
+      banner.style.display = "block";
     }
-  }
 
-  function initCookieBanner() {
-    const banner = document.getElementById("cookie-banner");
-    const modal = document.getElementById("cookie-settings-modal");
+    document.addEventListener("click", function (e) {
+      var target = e.target;
+      if (!target) return;
 
-    // Przyciski w głównym banerze
-    const acceptAllBtn = document.getElementById("cookie-accept-all");
-    const rejectAllBtn = document.getElementById("cookie-reject-all");
-    const settingsBtn = document.getElementById("cookie-settings-btn");
+      var currentBanner = document.getElementById("cookie-banner");
+      var modal = document.getElementById("cookie-settings-modal");
 
-    // Elementy modala
-    const saveSettingsBtn = document.getElementById("cookie-save-settings");
-    const chkAnalytics = document.getElementById(
-      "toggle-analytics",
-    ) as HTMLInputElement;
-    const chkAds = document.getElementById("toggle-ads") as HTMLInputElement;
-
-    const consentGiven = localStorage.getItem("way_cookie_consent");
-
-    if (!consentGiven) {
-      if (banner) {
-        banner.style.display = "block";
-        setTimeout(() => {
-          banner.classList.remove("translate-y-full");
-        }, 100);
+      if (target.closest("#cookie-settings-btn")) {
+        if (modal) {
+          modal.style.display = "flex";
+          document.documentElement.style.overflow = "hidden";
+        }
+        return;
       }
-    }
 
-    // OTWÓRZ MODAL
-    settingsBtn?.addEventListener("click", () => {
-      if (modal) {
-        modal.classList.remove("opacity-0", "pointer-events-none");
+      if (target.closest("#cookie-accept-all")) {
+        localStorage.setItem("way_cookie_consent", "all_granted");
+        updateConsent("granted", "granted");
+        closeEverything(currentBanner, modal);
+        return;
+      }
+
+      if (target.closest("#cookie-reject-all")) {
+        localStorage.setItem("way_cookie_consent", "all_denied");
+        updateConsent("denied", "denied");
+        closeEverything(currentBanner, modal);
+        return;
+      }
+
+      if (target.closest("#cookie-save-settings")) {
+        var chkAnalytics = document.getElementById("toggle-analytics");
+        var chkAds = document.getElementById("toggle-ads");
+
+        var consents = {
+          analytics:
+            chkAnalytics && chkAnalytics.checked ? "granted" : "denied",
+          ads: chkAds && chkAds.checked ? "granted" : "denied",
+        };
+
+        localStorage.setItem("way_cookie_consent", "custom");
+        localStorage.setItem("way_cookie_prefs", JSON.stringify(consents));
+
+        updateConsent(consents.analytics, consents.ads);
+        closeEverything(currentBanner, modal);
+        return;
       }
     });
 
-    // ZAPISZ WYBRANE Z MODALA
-    saveSettingsBtn?.addEventListener("click", () => {
-      const consents = {
-        analytics: chkAnalytics?.checked ? "granted" : "denied",
-        ads: chkAds?.checked ? "granted" : "denied",
-      };
-
-      localStorage.setItem("way_cookie_consent", "custom");
-      localStorage.setItem("way_cookie_prefs", JSON.stringify(consents));
-
-      updateConsent(consents.analytics, consents.ads);
-      hideBannerAndModal();
-    });
-
-    // ZAAKCEPTUJ WSZYSTKO (Szybki przycisk)
-    acceptAllBtn?.addEventListener("click", () => {
-      localStorage.setItem("way_cookie_consent", "all_granted");
-      updateConsent("granted", "granted");
-      hideBannerAndModal();
-    });
-
-    // ODRZUĆ WSZYSTKO (Szybki przycisk)
-    rejectAllBtn?.addEventListener("click", () => {
-      localStorage.setItem("way_cookie_consent", "all_denied");
-      updateConsent("denied", "denied");
-      hideBannerAndModal();
-    });
-
-    // Główna funkcja wysyłająca status do GA4
-    function updateConsent(analyticsStatus: string, adsStatus: string) {
+    function updateConsent(analyticsStatus, adsStatus) {
       if (typeof window.gtag === "function") {
         window.gtag("consent", "update", {
           analytics_storage: analyticsStatus,
@@ -209,19 +196,10 @@
       }
     }
 
-    function hideBannerAndModal() {
-      if (banner) {
-        banner.classList.add("translate-y-full");
-        setTimeout(() => {
-          banner.style.display = "none";
-        }, 300);
-      }
-      if (modal) {
-        modal.classList.add("opacity-0", "pointer-events-none");
-      }
+    function closeEverything(bannerEl, modalEl) {
+      if (bannerEl) bannerEl.style.display = "none";
+      if (modalEl) modalEl.style.display = "none";
+      document.documentElement.style.overflow = "";
     }
-  }
-
-  document.addEventListener("DOMContentLoaded", initCookieBanner);
-  document.addEventListener("astro:page-load", initCookieBanner);
+  })();
 </script>

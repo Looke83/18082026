@@ -1,6 +1,5 @@
 ---
-// Shared page shell: fonts, global styles, theme bootstrap, header/footer.
-// Every page in src/pages/* wraps its content in this layout.
+// src/layouts/BaseLayout.astro
 import Analytics from "../components/seo/Analytics.astro";
 import CookieBanner from "../components/ui/CookieBanner.astro";
 import "@fontsource-variable/inter";
@@ -34,7 +33,6 @@ const { title, description, path, ogImage, noindex } = Astro.props;
       noindex={noindex}
     />
     <script is:inline>
-      // Runs before first paint — prevents a flash of the wrong theme.
       (function () {
         var stored = localStorage.getItem("way-it-theme");
         var prefersDark = window.matchMedia(
@@ -47,18 +45,24 @@ const { title, description, path, ogImage, noindex } = Astro.props;
     </script>
     <Analytics />
   </head>
-  <body class="bg-(--color-background) text-(--color-text-primary) antialiased">
+  <!-- Zero dodatkowych klas na body, czysta karta -->
+  <body
+    class="bg-(--color-background) text-(--color-text-primary) antialiased w-full relative"
+  >
+    <CookieBanner />
+
     <a
       href="#content"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-(--color-primary) focus:px-4 focus:py-2 focus:text-(--color-primary-fg)"
     >
       Przejdź do treści
     </a>
+
+    <!-- Bezpośrednio w body, bez wrappera -->
     <Header />
-    <main id="content">
+    <main id="content" class="pt-18">
       <slot />
     </main>
     <Footer />
-    <CookieBanner />
   </body>
 </html>

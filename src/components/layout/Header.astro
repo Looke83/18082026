@@ -13,7 +13,7 @@ import logoImg from "../../assets/wayit.webp"; // Dostosuj ścieżkę do pliku
 
 <header
   id="site-header"
-  class="sticky top-0 z-50 border-b border-transparent bg-(--color-background)/80 backdrop-blur-md transition-all duration-300 ease-in-out"
+  class="fixed top-0 left-0 w-full z-50 border-b border-transparent bg-(--color-background)/80 backdrop-blur-md transition-transform duration-300 ease-in-out"
   data-od-id="site-header"
 >
   <Container
@@ -78,7 +78,7 @@ import logoImg from "../../assets/wayit.webp"; // Dostosuj ścieżkę do pliku
         href={headerCta.href}
         variant="primary"
         size="sm"
-        class="hidden lg:inline-flex"
+        class="!hidden lg:inline-flex"
         data-od-id="header-cta"
       >
         {headerCta.label}

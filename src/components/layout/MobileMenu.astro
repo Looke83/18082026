@@ -21,7 +21,8 @@ import Button from "../ui/Button.astro";
   id="mobile-menu-panel"
   data-mobile-panel
   data-open="false"
-  class="fixed top-0 right-0 z-[100] flex h-screen w-[85vw] max-w-sm flex-col bg-(--color-background) shadow-2xl transition-transform duration-300 ease-in-out data-[open=false]:translate-x-full data-[open=true]:translate-x-0 lg:hidden"
+  inert
+  class="fixed top-0 right-0 z-[100] flex h-[100dvh] w-[85vw] max-w-sm flex-col bg-(--color-background) shadow-2xl transition-transform duration-300 ease-in-out data-[open=false]:translate-x-full data-[open=true]:translate-x-0 lg:hidden"
   role="dialog"
   aria-modal="true"
   aria-label="Menu główne"
@@ -43,7 +44,10 @@ import Button from "../ui/Button.astro";
     </button>
   </div>
 
-  <nav class="flex-1 overflow-y-auto px-5 py-6" aria-label="Nawigacja mobilna">
+  <nav
+    class="flex-1 min-h-0 overflow-y-auto px-5 py-6"
+    aria-label="Nawigacja mobilna"
+  >
     <ul class="space-y-1">
       <li>
         <a
@@ -111,13 +115,8 @@ import Button from "../ui/Button.astro";
   </nav>
 
   <div class="shrink-0 border-t border-(--color-border) px-5 py-5">
-    <Button
-      href={headerCta.href}
-      variant="primary"
-      class="w-full"
-      data-od-id="mobile-menu-cta"
-    >
-      {headerCta.label}
+    <Button href={headerCta?.href || "/"} variant="primary" class="w-full">
+      {headerCta?.label || "Bezpłatna wycena"}
     </Button>
   </div>
 </div>
@@ -166,6 +165,9 @@ import Button from "../ui/Button.astro";
     panel.dataset.open = "true";
     overlay.dataset.open = "true";
 
+    // Zdejmujemy inert, żeby panel był dostępny dla czytników i klawiatury
+    panel.removeAttribute("inert");
+
     body.classList.add("menu-open");
     html.classList.add("menu-open");
 
@@ -182,6 +184,9 @@ import Button from "../ui/Button.astro";
 
     panel.dataset.open = "false";
     overlay.dataset.open = "false";
+
+    // Ukrywamy panel przed czytnikami i fokusem, gdy jest zamknięty
+    panel.setAttribute("inert", "");
 
     body.classList.remove("menu-open");
     html.classList.remove("menu-open");
