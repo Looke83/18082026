@@ -1,0 +1,136 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import PricingGrid from "../components/sections/PricingGrid.astro";
+import Container from "../components/layout/Container.astro";
+import Button from "../components/ui/Button.astro";
+import Badge from "../components/ui/Badge.astro";
+import Icon from "../components/ui/Icon.astro";
+import CTASection from "../components/sections/CTASection.astro";
+import {
+  categoryLabels,
+  getServicesByCategory,
+  type Service,
+} from "../data/services";
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+// Wyliczenie powiązanych usług dla standardowego widoku
+const related = getServicesByCategory(service.category).filter(
+  (s) => s.slug !== service.slug,
+);
+---
+
+<BaseLayout
+  title={service.title}
+  description={service.shortDescription}
+  path={`/uslugi/${service.slug}`}
+>
+  <section
+    class="section-glow-hero pt-14 pb-16 md:pt-20 md:pb-20"
+    data-od-id="service-hero"
+    aria-labelledby="service-hero-heading"
+  >
+    <Container class="max-w-3xl">
+      <a
+        href="/#oferta"
+        class="link-underline inline-flex items-center gap-1.5 text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary)"
+      >
+        <Icon name="chevron-right" class="h-4 w-4 rotate-180" />
+        Wróć do oferty
+      </a>
+      <div class="mt-6">
+        <Badge variant="primary">{categoryLabels[service.category]}</Badge>
+      </div>
+      <h1
+        id="service-hero-heading"
+        class="mt-4 text-4xl font-bold tracking-tight text-(--color-text-primary) sm:text-5xl"
+      >
+        {service.title}
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-(--color-text-secondary)">
+        {service.description}
+      </p>
+      <Button
+        href="/kontakt"
+        variant="primary"
+        size="lg"
+        class="mt-8"
+        data-od-id="service-cta"
+      >
+        Zapytaj o wycenę
+      </Button>
+    </Container>
+  </section>
+
+  <section
+    class="border-t border-(--color-border) py-16 md:py-24"
+    data-od-id="service-features"
+    aria-labelledby="service-features-heading"
+  >
+    <Container class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div>
+        <h2
+          id="service-features-heading"
+          class="text-2xl font-bold tracking-tight text-(--color-text-primary) md:text-3xl"
+        >
+          Co obejmuje ta usługa
+        </h2>
+        <ul class="mt-6 space-y-4">
+          {
+            service.features.map((feature) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-(--color-accent-light) text-(--color-accent)">
+                  <Icon name="check" class="h-3.5 w-3.5" />
+                </span>
+                <span class="text-(--color-text-secondary)">{feature}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {
+        related.length > 0 && (
+          <div class="card-surface p-8 md:p-10">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-(--color-text-muted)">
+              Powiązane usługi — {categoryLabels[service.category]}
+            </h3>
+            <ul class="mt-5 space-y-3">
+              {related.map((s) => (
+                <li>
+                  <a
+                    href={`/uslugi/${s.slug}`}
+                    class="link-underline flex items-center justify-between gap-3 py-1 text-sm font-medium text-(--color-text-primary) hover:text-(--color-primary)"
+                  >
+                    {s.title}
+                    <Icon name="arrow-right" class="h-4 w-4 flex-shrink-0" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </Container>
+  </section>
+
+  {
+    service.pricing && (
+      <PricingGrid
+        title={service.pricing.title}
+        subtitle={service.pricing.subtitle}
+        plans={service.pricing.plans}
+        dataOdId={`pricing-${service.slug}`}
+      />
+    )
+  }
+
+  <CTASection
+    title={`Potrzebujesz usługi „${service.title}”?`}
+    description="Napisz do nas — bezpłatnie przygotujemy wycenę dopasowaną do Twojej firmy."
+  />
+</BaseLayout>

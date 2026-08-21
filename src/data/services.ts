@@ -12,6 +12,7 @@ export interface ServicePricingPlan {
   name: string;
   badge?: string;
   description?: string;
+  beforePriceText?: string;
   price: string;
   period?: string;
   includesPreviousText?: string;
@@ -24,6 +25,8 @@ export interface ServicePricing {
   subtitle?: string;
   plans: ServicePricingPlan[];
 }
+
+export type LayoutVariant = "web-creation" | "it-support" | "erp" | "standard";
 export interface Service {
   slug: string;
   title: string;
@@ -33,6 +36,7 @@ export interface Service {
   icon: IconName;
   features: string[];
   pricing?: ServicePricing;
+  layoutVariant?: LayoutVariant;
 }
 
 export type IconName =
@@ -174,6 +178,7 @@ export const services: Service[] = [
       plans: [
         {
           name: "Start",
+          beforePriceText: "od",
           price: "2000",
           description: "Idealna wizytówka dla małych firm i freelancerów.",
           features: [
@@ -188,6 +193,7 @@ export const services: Service[] = [
           name: "Biznes",
           badge: "Polecany",
           highlighted: true,
+          beforePriceText: "od",
           price: "3500",
           description: "Rozbudowana strona firmowa nakierowana na zdobywanie klientów.",
           includesPreviousText: "Wszystko co w pakiecie Start, plus:", // <--- OTO NAGŁÓWEK
@@ -238,6 +244,7 @@ export const services: Service[] = [
       plans: [
         {
           name: "Start e-commerce",
+          beforePriceText: "od",
           price: "3000",
           description: "Podstawowy sklep internetowy.",
           features: [
@@ -254,6 +261,7 @@ export const services: Service[] = [
           name: "Biznes e-commerce",
           badge: "Polecany",
           highlighted: true,
+          beforePriceText: "od",
           price: "6000",
           description: "Rozbudowany sklep internetowy przygotowany do sprzedaży.",
           includesPreviousText: "Wszystko co w pakiecie Start e-commerce, plus:", // <--- OTO NAGŁÓWEK
@@ -297,8 +305,8 @@ export const services: Service[] = [
       "Szybki kontakt w razie awarii",
     ],
     pricing: {
-      title: "Obsługa Wordpress",
-      subtitle: "Przejrzyste warunki, bez ukrytych kosztów i powracających abonamentów.",
+      title: "Opieka Wordpress",
+      subtitle: "Przejrzyste warunki, bez ukrytych kosztów.",
       plans: [
         {
           name: "Start",
