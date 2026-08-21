@@ -4,6 +4,7 @@ export const sklepyInternetoweService: Service =
 
 {
     slug: "sklepy-internetowe",
+    order: 2,
     title: "Sklepy internetowe",
     shortDescription: "E-commerce zaprojektowany pod konwersję i skalę.",
     description:
@@ -67,4 +68,5 @@ export const sklepyInternetoweService: Service =
         },
       ],
     },
+    layoutVariant: "stronysklepywww",
   }

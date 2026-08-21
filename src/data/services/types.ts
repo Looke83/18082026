@@ -2,7 +2,7 @@
 
 export type ServiceCategory = "it" | "web" | "security" | "fiscal";
 
-export type LayoutVariant = "web-creation" | "it-support" | "erp" | "standard";
+export type LayoutVariant = "stronysklepywww" | "standard" | "Berberis";
 
 export interface ServicePricingPlan {
   name: string;
@@ -57,6 +57,7 @@ export type IconName =
 
 export interface Service {
   slug: string;
+  order?: number;
   title: string;
   shortDescription: string;
   description: string;

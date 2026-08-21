@@ -4,6 +4,7 @@ export const systemyAlarmoweService: Service =
 
 {
     slug: "systemy-alarmowe",
+    order: 1,
     title: "Systemy alarmowe SSWiN",
     shortDescription: "Sygnalizacja włamania i napadu dla firm i osób prywatnych.",
     description:

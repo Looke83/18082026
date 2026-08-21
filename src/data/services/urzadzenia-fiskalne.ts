@@ -4,6 +4,7 @@ export const urzadzeniaFiskalneService: Service =
 
 {
     slug: "urzadzenia-fiskalne",
+    order: 1,
     title: "Kasy i drukarki fiskalne",
     shortDescription: "Sprzedaż i fiskalizacja urządzeń.",
     description:

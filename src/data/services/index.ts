@@ -32,7 +32,9 @@ const modules = import.meta.glob<{ [key: string]: Service }>('./*.ts', { eager: 
 // Tworzy tablicę `services`, ignorując pliki `index.ts` oraz `types.ts`
 export const services: Service[] = Object.entries(modules)
   .filter(([filepath]) => !filepath.includes('index.ts') && !filepath.includes('types.ts'))
-  .flatMap(([_, mod]) => Object.values(mod));
+  .flatMap(([_, mod]) => Object.values(mod))
+  .filter((item): item is Service => typeof item === 'object' && item !== null && 'slug' in item) // 👈 Ten filtr ignoruje tablicę kroków!
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
 // Funkcje pomocnicze
 export function getServiceBySlug(slug: string): Service | undefined {

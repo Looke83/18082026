@@ -4,6 +4,7 @@ export const obslugaITService: Service =
 
 {
     slug: "obsluga-it",
+    order: 1,
     title: "Obsługa informatyczna",
     shortDescription: "Bieżące wsparcie IT dla firm — zdalnie i na miejscu.",
     description:

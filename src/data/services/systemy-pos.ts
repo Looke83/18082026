@@ -5,6 +5,7 @@ export const systemyPOSService: Service =
 
 {
     slug: "systemy-pos",
+    order: 2,
     title: "Systemy kasowe POS",
     shortDescription: "Wdrożenia stanowisk kasowych dla handlu i gastronomii.",
     description:

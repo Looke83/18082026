@@ -3,6 +3,7 @@ import type { Service } from "./types";
 export const stronyWWWService: Service =
 {
     slug: "strony-www",
+    order: 1,
     title: "Projektowanie stron WWW",
     shortDescription: "Strony firmowe zaprojektowane pod cel biznesowy.",
     description:
@@ -67,4 +68,5 @@ export const stronyWWWService: Service =
         },
       ],
     },
+    layoutVariant: "stronysklepywww",
   }

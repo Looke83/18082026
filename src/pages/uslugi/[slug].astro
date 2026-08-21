@@ -1,6 +1,8 @@
 ---
 import { services, type LayoutVariant } from "../../data/services";
 import StandardServiceLayout from "../../layouts/StandardServiceLayout.astro";
+import stronySklepywwwLayout from "../../layouts/stronysklepywwwLayout.astro";
+import BerberisLayout from "../../layouts/BerberisLayout.astro";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (() => {
@@ -15,6 +17,8 @@ const { service } = Astro.props;
 // Określamy typ słownika: kluczem jest LayoutVariant, a wartością komponent Astro
 const layoutMap: Partial<Record<LayoutVariant, any>> = {
   standard: StandardServiceLayout,
+  stronysklepywww: stronySklepywwwLayout,
+  Berberis: BerberisLayout,
   // Z czasem będziesz tu dopisywać kolejne layouty:
   // "web-creation": WebCreationServiceLayout,
 };

@@ -4,6 +4,7 @@ export const infrastrukturaITService: Service =
 
 {
     slug: "infrastruktura-it",
+    order: 2,
     title: "Infrastruktura IT",
     shortDescription: "Projektowanie i wdrażanie sieci, serwerów i backupu.",
     description:

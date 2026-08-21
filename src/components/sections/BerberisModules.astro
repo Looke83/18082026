@@ -1,0 +1,41 @@
+---
+import Container from "../layout/Container.astro";
+import Icon from "../ui/Icon.astro";
+import { berberisModules } from "@/data/sections/berberis-details";
+---
+
+<section class="border-t border-(--color-border) py-16 md:py-24">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2
+        class="text-3xl font-bold tracking-tight text-(--color-text-primary) sm:text-4xl"
+      >
+        Obszary funkcjonalne systemu Berberis
+      </h2>
+      <p class="mt-4 text-lg text-(--color-text-secondary)">
+        Wybierz moduły, których aktualnie potrzebujesz – system rozwija się
+        razem z Twoim biznesem.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        berberisModules.map((item) => (
+          <div class="card-surface p-6 md:p-8 flex flex-col justify-between hover:border-(--color-primary) transition-all">
+            <div>
+              <div class="h-12 w-12 rounded-lg bg-(--color-primary-light) text-(--color-primary) flex items-center justify-center mb-5">
+                <Icon name={item.icon} class="h-6 w-6" />
+              </div>
+              <h3 class="text-xl font-bold text-(--color-text-primary) mb-2">
+                {item.title}
+              </h3>
+              <p class="text-sm text-(--color-text-secondary) leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>

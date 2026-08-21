@@ -1,0 +1,76 @@
+---
+import Container from "../layout/Container.astro";
+import { webProcessSteps } from "@/data/sections/web-process";
+
+// Typ pojedynczego kroku procesu
+export interface ProcessStep {
+  number: string | number;
+  title: string;
+  description: string;
+  badge?: string;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  steps?: ProcessStep[];
+}
+
+const {
+  title = "Jak wygląda proces powstawania Twojej strony?",
+  subtitle = "Przechodzimy przez jasny, 5-etapowy proces. Od pierwszej rozmowy po wdrożenie na serwer.",
+  steps = webProcessSteps,
+} = Astro.props;
+---
+
+<section class="border-t border-(--color-border) py-16 md:py-24 transition-colors">
+  <Container>
+    <!-- Nagłówek sekcji -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-(--color-text-primary) mb-4">
+        {title}
+      </h2>
+      <p class="text-(--color-text-secondary) text-lg">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Główny kontener osi czasu -->
+    <div class="relative">
+      <!-- Pionowa linia na środku (widoczna na ekranach md+) -->
+      <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-(--color-border) opacity-80"></div>
+
+      <div class="space-y-8 md:space-y-0">
+        {steps.map((step, index) => {
+          const isEven = index % 2 === 0;
+          return (
+            <div class="relative md:flex md:items-center md:justify-between md:mb-12">
+              
+              <!-- Punkt/Okrąg na środku linii -->
+              <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center w-12 h-12 rounded-full card-surface border-2 border-(--color-primary) text-(--color-primary) font-bold z-10 shadow-md">
+                {step.number}
+              </div>
+
+              <!-- Lewa / Prawa strona z treścią -->
+              <div class={`md:w-[45%] ${isEven ? 'md:pr-8 md:text-right' : 'md:order-2 md:pl-8 md:text-left'}`}>
+                <div class="card-surface p-6 md:p-8 rounded-2xl border border-(--color-border) transition-all duration-300 hover:border-(--color-primary)">
+                  <div class={`flex items-center gap-2 mb-3 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-(--color-accent-light) text-(--color-accent) border border-(--color-accent)/20">
+                      {step.badge || `Krok ${index + 1}`}
+                    </span>
+                  </div>
+                  <h3 class="text-xl font-bold text-(--color-text-primary) mb-2">{step.title}</h3>
+                  <p class="text-(--color-text-secondary) text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </div>
+
+              <!-- Pusta kolumna symetryczna dla układu dwukolumnowego -->
+              <div class={`hidden md:block md:w-[45%] ${isEven ? 'md:order-2' : 'md:order-1'}`}></div>
+
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </Container>
+</section>
