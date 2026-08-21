@@ -27,7 +27,6 @@ import bmsLightImg from "../assets/logos/bms-light.png";
 import maestroLightImg from "../assets/logos/maestro-light.png";
 
 //cennik
-import PricingGrid from "../components/sections/PricingGrid.astro";
 
 const partnerLogos = [
   { name: "Klimapoz", src: klimapozImg },
@@ -36,50 +35,6 @@ const partnerLogos = [
   { name: "Hunters", src: huntersImg },
   { name: "Maestro", src: maestroImg, srcLight: maestroLightImg },
   { name: "Meduza", src: meduzaImg },
-];
-
-const pricingPlans = [
-  {
-    name: "Normal",
-    description: "Podstawowa opieka i bezpieczeństwo dla małych stron.",
-    price: "150",
-    features: [
-      "Kopia zapasowa raz w miesiącu",
-      "2x w miesiącu aktualizacja WordPress",
-      "Podstawowy monitoring dostępności",
-      { text: "Dedykowany priorytet zgłoszeń", included: false },
-      { text: "Audyt bezpieczeństwa", included: false },
-    ],
-    buttonText: "Zamów Normal",
-  },
-  {
-    name: "Pro",
-    badge: "Najpopularniejszy",
-    highlighted: true,
-    description: "Pełne wsparcie techniczne dla rozwijających się firm.",
-    price: "350",
-    features: [
-      "Kopia zapasowa raz w tygodniu",
-      "Cotygodniowe aktualizacje WordPress i wtyczek",
-      "Monitoring dostępności 24/7",
-      "Reakcja na awarię do 4h",
-      { text: "Audyt bezpieczeństwa", included: false },
-    ],
-    buttonText: "Wybierz Pro",
-  },
-  {
-    name: "Business",
-    description: "Maksymalna ochrona i priorytetowe wsparcie serwisowe.",
-    price: "600",
-    features: [
-      "Codzienna kopia zapasowa (Cloud)",
-      "Aktualizacje na środowisku stagingowym",
-      "Monitoring dostępności 24/7 z SLA",
-      "Dedykowany priorytet zgłoszeń (SLA 1h)",
-      "Pełny audyt bezpieczeństwa raz w roku",
-    ],
-    buttonText: "Skontaktuj się",
-  },
 ];
 ---
 

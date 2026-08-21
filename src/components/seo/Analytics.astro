@@ -1,0 +1,40 @@
+---
+// src/components/seo/Analytics.astro
+const MEASUREMENT_ID = "G-P3MHSWGKS7";
+---
+
+<script is:inline define:vars={{ MEASUREMENT_ID }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    wait_for_update: 500,
+  });
+
+  window.gtag("js", new Date());
+  window.gtag("config", MEASUREMENT_ID, {
+    send_page_view: true,
+  });
+
+  // Obsługa zmian podstron w Astro (dla płynnych przejść / SPA)
+  document.addEventListener("astro:page-load", () => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "page_view", {
+        page_path: window.location.pathname,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  });
+</script>
+
+<script
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
+></script>

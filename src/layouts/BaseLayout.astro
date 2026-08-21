@@ -1,6 +1,8 @@
 ---
 // Shared page shell: fonts, global styles, theme bootstrap, header/footer.
 // Every page in src/pages/* wraps its content in this layout.
+import Analytics from "../components/seo/Analytics.astro";
+import CookieBanner from "../components/ui/CookieBanner.astro";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource/jetbrains-mono/400.css";
@@ -24,17 +26,26 @@ const { title, description, path, ogImage, noindex } = Astro.props;
 <!doctype html>
 <html lang="pl">
   <head>
-    <SEOHead title={title} description={description} path={path} ogImage={ogImage} noindex={noindex} />
+    <SEOHead
+      title={title}
+      description={description}
+      path={path}
+      ogImage={ogImage}
+      noindex={noindex}
+    />
     <script is:inline>
       // Runs before first paint — prevents a flash of the wrong theme.
       (function () {
         var stored = localStorage.getItem("way-it-theme");
-        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         var isDark = stored ? stored === "dark" : prefersDark;
         document.documentElement.classList.toggle("dark", isDark);
         document.documentElement.style.colorScheme = isDark ? "dark" : "light";
       })();
     </script>
+    <Analytics />
   </head>
   <body class="bg-(--color-background) text-(--color-text-primary) antialiased">
     <a
@@ -48,5 +59,6 @@ const { title, description, path, ogImage, noindex } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <CookieBanner />
   </body>
 </html>
