@@ -4,6 +4,7 @@ import StandardServiceLayout from "../../layouts/StandardServiceLayout.astro";
 import stronySklepywwwLayout from "../../layouts/stronysklepywwwLayout.astro";
 import BerberisLayout from "../../layouts/BerberisLayout.astro";
 import obslugaItLayout from "../../layouts/obslugaitLayout.astro";
+import ProgramyLayout from "../../layouts/ProgramyLayout.astro";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (() => {
@@ -21,6 +22,7 @@ const layoutMap: Partial<Record<LayoutVariant, any>> = {
   stronysklepywww: stronySklepywwwLayout,
   Berberis: BerberisLayout,
   obslugait: obslugaItLayout,
+  programy: ProgramyLayout,
   // Z czasem będziesz tu dopisywać kolejne layouty:
   // "web-creation": WebCreationServiceLayout,
 };
