@@ -4,6 +4,8 @@
 import Container from "./Container.astro";
 import Icon from "../ui/Icon.astro";
 import { footerColumns, socialLinks } from "../../data/navigation";
+import { Image } from "astro:assets";
+import logoImg from "../../assets/wayit.webp"; // Dostosuj ścieżkę do pliku
 
 const year = new Date().getFullYear();
 ---
@@ -20,10 +22,8 @@ const year = new Date().getFullYear();
         href="/"
         class="flex items-center gap-2 font-heading text-xl font-bold tracking-tight text-(--color-text-primary)"
       >
-        <span
-          class="flex h-9 w-9 items-center justify-center rounded-lg bg-(--color-primary) text-(--color-primary-fg)"
-          >w</span
-        >
+        <Image src={logoImg} alt="way-IT Logo" class="h-9 w-auto" />
+
         {footerColumns.company.title}
       </a>
       <p
