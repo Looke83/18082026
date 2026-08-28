@@ -28,10 +28,30 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Honeypot
-if (!empty($_POST['website'])) {
+// 1. Honeypot (pole "confirm_company" musi być całkowicie puste)
+if (!empty($_POST['confirm_company'])) {
+    // Udajemy sukces dla bota (tzw. tarpit / soft block)
     http_response_code(200);
     echo json_encode(['message' => 'Dziękujemy za wiadomość!']);
+    exit;
+}
+
+// 2. Ochrona czasowa (Time-check)
+// Sprawdzamy, czy przesłano znacznik czasu i czy formularz nie został wysłany zbyt szybko (np. w mniej niż 3 sekundy)
+if (isset($_POST['form_time'])) {
+    $form_time = (int)$_POST['form_time'];
+    $current_time = time();
+
+    // Jeśli wysłano w mniej niż 3 sekundy lub minęło więcej niż 24 godziny (stara sesja)
+    if (($current_time - $form_time) < 3 || ($current_time - $form_time) > 86400) {
+        http_response_code(200); // Udany response dla bota
+        echo json_encode(['message' => 'Dziękujemy za wiadomość!']);
+        exit;
+    }
+} else {
+    // Brak znacznika czasu = próba wysłania bezpośrednio przez skrypt pomijający stronę
+    http_response_code(400);
+    echo json_encode(['message' => 'Nieprawidłowe żądanie.']);
     exit;
 }
 

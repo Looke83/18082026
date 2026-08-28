@@ -32,19 +32,26 @@ import { footerColumns } from "../../data/navigation";
         novalidate
         data-od-id="contact-form"
       >
+        <!-- DODAJ TĘ LINIJKĘ WEWNĄTRZ FORMULARZA -->
+        <input
+          type="hidden"
+          name="form_time"
+          value={Math.floor(Date.now() / 1000)}
+        />
         <!-- HONEYPOT FIELD - pułapka na boty -->
         <div
-          class="sr-only aria-hidden:true"
+          class="opacity-0 absolute -left-[9999px] pointer-events-none"
           aria-hidden="true"
-          style="display:none !important;"
+          tabindex="-1"
         >
-          <label for="cf-website">Nie wypełniaj tego pola</label>
+          <label for="cf-company">Twoja firma (pozostaw puste)</label>
           <input
-            id="cf-website"
-            name="website"
+            id="cf-company"
+            name="confirm_company"
             type="text"
             tabindex="-1"
             autocomplete="off"
+            value=""
           />
         </div>
 
