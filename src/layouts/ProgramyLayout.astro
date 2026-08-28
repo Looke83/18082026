@@ -7,6 +7,7 @@ import Icon from "../components/ui/Icon.astro";
 import CTASection from "../components/sections/CTASection.astro";
 import ProcessTimeline from "../components/sections/ProcessTimeLine.astro";
 import { programySprzedazoweIntegracjaSteps } from "../data/services/programy-sprzedazowe-integracja";
+import ServiceFeaturesList from "../components/sections/ServiceFeaturesList.astro";
 
 import {
   categoryLabels,
@@ -82,16 +83,7 @@ const related = getServicesByCategory(service.category).filter(
           Co obejmuje ta usługa
         </h2>
         <ul class="mt-6 space-y-4">
-          {
-            service.features.map((feature) => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-(--color-accent-light) text-(--color-accent)">
-                  <Icon name="check" class="h-3.5 w-3.5" />
-                </span>
-                <span class="text-(--color-text-secondary)">{feature}</span>
-              </li>
-            ))
-          }
+          {(<ServiceFeaturesList features={service.features} />)}
         </ul>
       </div>
 

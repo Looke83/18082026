@@ -7,14 +7,15 @@ export const stronyWWWService: Service =
     title: "Projektowanie stron WWW",
     shortDescription: "Strony firmowe zaprojektowane pod cel biznesowy.",
     description:
-      "Projektujemy i budujemy strony internetowe, które nie tylko wyglądają profesjonalnie, ale realnie wspierają cele biznesowe — generują zapytania, budują wiarygodność i działają szybko na każdym urządzeniu.",
+      "Projektujemy i budujemy nowoczesne, unikalne strony internetowe dla firm, które łączą bezkompromisowy design z najwyższą wydajnością technologiczną. Tworzymy serwisy, które nie tylko świetnie wyglądają na każdym urządzeniu, ale przede wszystkim realnie wspierają Twoje cele biznesowe – budują wizerunek eksperta, przyciągają klientów i skutecznie generują zapytania ofertowe. Stawiamy na czysty kod, błyskawiczne ładowanie i pełną optymalizację pod kątem wyszukiwarki Google.",
     category: "web",
     icon: "code",
     features: [
-      "Projekt UX/UI dopasowany do marki",
-      "Strony błyskawiczne i responsywne",
-      "Optymalizacja pod SEO od pierwszego dnia",
-      "Panel do samodzielnej edycji treści",
+      "Strategia, UX/UI i projekt graficzny: Indywidualny projekt wizualny dopasowany do identyfikacji wizualnej Twojej marki, uwzględniający zasady użyteczności (UX) oraz ścieżkę klienta (CRO) prowadzącą do konwersji.",
+      "Wydajne i responsywne wdrożenie (Mobile First): Kodowanie strony w oparciu o najnowsze technologie webowe (np. Astro, nowoczesne szablony WordPress), gwarantujące perfekcyjne działanie na smartfonach, tabletach i komputerach.",
+      "Optymalizacja pod SEO od pierwszego dnia: Dbanie o strukturę nagłówków (H1-H3), poprawność semantyczną kodu, optymalizację grafik i szybkość ładowania, co zapewnia doskonały start w wynikach wyszukiwania.",
+      "Intuicyjny panel do samodzielnej edycji treści (CMS): Wdrożenie wygodnego i prostego w obsłudze systemu zarządzania treścią, dzięki któremu bez problemu zmienisz teksty, dodasz wpis na bloga czy nową realizację.",
+      "Zabezpieczenia, SSL i wdrożenie na serwer: Konfiguracja bezpiecznego protokołu szyfrowania danych (SSL), podpięcie domeny, integracja z narzędziami analitycznymi (Google Analytics) oraz uruchomienie strony na stabilnym hostingu.",
     ],
     // DEDYKOWANY CENNIK DLA TEJ USŁUGI
     pricing: {

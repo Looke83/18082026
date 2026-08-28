@@ -46,15 +46,15 @@ export const erpBerberisService: Service = {
   title: "System ERP Berberis",
   shortDescription: "Zintegrowane zarządzanie sprzedażą, magazynem, CRM i finansami w jednym systemie ERP.",
   description:
-    "Wdrażamy system ERP Berberis dostosowany do specyfiki Twojej branży — od zarządzania magazynem po pełną kontrolę procesów sprzedażowych i księgowych w jednym miejscu.",
+    "Wdrażamy i konfigurujemy zaawansowany system ERP Berberis, który centralizuje i optymalizuje zarządzanie całą firmą w jednym miejscu. Łączymy gospodarkę magazynową (WMS), sprzedaż, finanse, logistykę oraz produkcję w jeden spójny ekosystem dopasowany do specyfiki Twojej branży. Pomagamy wyeliminować \"wąskie gardła\", automatyzujemy codzienne procesy i dajemy zarządowi rzetelne dane analityczne w czasie rzeczywistym.",
   category: "it",
   icon: "erp",
   features: [
-    "Analiza przedwdrożeniowa i dobór modułów",
-    "Instalacja, konfiguracja i migracja danych",
-    "Integracja z KSeF, bankowością i e-commerce",
-    "Szkolenia stanowiskowe dla pracowników",
-    "Stałe wsparcie techniczne i obsługa serwisowa",
+    "Analiza przedwdrożeniowa i dobór modułów: Dokładny audyt procesów biznesowych w firmie, identyfikacja potrzeb i dobór optymalnego zestawu modułów systemowych (sprzedaż, magazyn, finanse, serwis, produkcja).",
+    "Instalacja, konfiguracja i migracja danych: Bezpieczne wdrożenie systemu na serwerach (lokalnych lub w chmurze), konfiguracja polityk dostępu, struktury firmy oraz profesjonalne przeniesienie bazy danych ze starych programów.",
+    "Integracja z KSeF, bankowością i e-commerce: Pełna integracja z Krajowym Systemem e-Faktur (KSeF), automatyczna wymiana danych z systemami bankowymi oraz dwukierunkowa synchronizacja ze sklepami internetowymi i platformami B2B.",
+    "Szkolenia stanowiskowe dla pracowników: Praktyczne warsztaty i szkolenia z obsługi systemu dopasowane do konkretnych ról w firmie (magazynierzy, handlowcy, księgowość, kadra zarządzająca).",
+    "Stałe wsparcie techniczne i obsługa serwisowa: Opieka powdrożeniowa, szybka pomoc helpdesku, aktualizacje systemu zgodnie z polskimi przepisami prawa oraz rozwój oprogramowania wraz z rosnącymi potrzebami biznesu.",
   ],
   layoutVariant: "Berberis",
 };

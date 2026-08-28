@@ -1,0 +1,45 @@
+---
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  features: string[];
+}
+
+const { features } = Astro.props;
+---
+
+<ul class="mt-6 space-y-4">
+  {
+    features.map((feature) => {
+      const hasColon = feature.includes(":");
+      let title = "";
+      let description = feature;
+
+      if (hasColon) {
+        const parts = feature.split(":");
+        title = parts[0] + ":";
+        description = parts.slice(1).join(":");
+      }
+
+      return (
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-(--color-accent-light) text-(--color-accent)">
+            <Icon name="check" class="h-3.5 w-3.5" />
+          </span>
+          <span class="text-(--color-text-secondary)">
+            {hasColon ? (
+              <>
+                <strong class="text-(--color-text-primary) font-semibold">
+                  {title}
+                </strong>
+                {description}
+              </>
+            ) : (
+              <span>{feature}</span>
+            )}
+          </span>
+        </li>
+      );
+    })
+  }
+</ul>
