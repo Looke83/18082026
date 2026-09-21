@@ -23,6 +23,7 @@ interface Props {
   title?: string;
   subtitle?: string;
   addinfo?: string;
+  addinfo2?: string;
   plans: PricingPlan[];
   dataOdId?: string;
 }
@@ -31,6 +32,7 @@ const {
   title = "Elastyczne pakiety dopasowane do Twoich potrzeb",
   subtitle = "Wybierz zakres wsparcia IT, który najlepiej odpowiada skali Twojego biznesu.",
   addinfo,
+  addinfo2,
   plans,
   dataOdId = "pricing-section",
 } = Astro.props;
@@ -52,6 +54,11 @@ const {
           {addinfo && (
             <p class="text-sm font-bold text-(--color-text) mt-2">
               {addinfo}
+            </p>
+          )}
+          {addinfo2 && (
+            <p class="text-sm text-(--color-text-muted) mt-2">
+              {addinfo2}
             </p>
           )}
         </div>

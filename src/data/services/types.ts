@@ -20,6 +20,7 @@ export interface ServicePricing {
   title?: string;
   subtitle?: string;
   addinfo?: string;
+  addinfo2?: string;
   plans: ServicePricingPlan[];
 }
 

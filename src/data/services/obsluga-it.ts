@@ -21,13 +21,14 @@ export const obslugaITService: Service =
 pricing: {
       title: "Stała obsługa informatyczna dla firm",
       subtitle: "Stabilność, bezpieczeństwo i szybki czas reakcji bez niespodzianek.",
-      addinfo: "Każda kolejna roboczogodzina poza pakietem : 150zł netto.",
+      addinfo: "Każda kolejna roboczogodzina poza pakietem : 200zł netto.",
+      addinfo2: "Pakiety miesięczne roboczogodzin wsparcia technicznego online są rozliczane w cyklu miesięcznym i nie przechodzą na kolejny miesiąc.",
       plans: [
         {
           name: "Standard",
           beforePriceText: "od",
           price: "500",
-          period: "zł / miesięcznie",
+          period: "zł netto / miesięcznie",
           description: "Idealny wybór dla małych biur i jednoosobowych działalności.",
           features: [
             "Wsparcie w godzinach roboczych (8:00–16:00)",
@@ -44,7 +45,7 @@ pricing: {
           highlighted: true,
           beforePriceText: "od",
           price: "1500",
-          period: "zł / miesięcznie",
+          period: "zł netto / miesięcznie",
           description: "Dla rozwijających się firm, gdzie przestój generuje straty.",
           includesPreviousText: "Wszystko co w pakiecie Standard, plus:",
           features: [
@@ -53,7 +54,7 @@ pricing: {
             "Regularne aktualizacje systemów i oprogramowania",
             "Regularne testy przywracania danych z backupu",
             "Kompleksowe zarządzanie bezpieczeństwem",
-            "W cenie abonamentu 6 roboczogodzin wsparcia technicznego online miesięcznie",
+            "W cenie abonamentu 8 roboczogodzin wsparcia technicznego online miesięcznie",
           ],
         },
         {
