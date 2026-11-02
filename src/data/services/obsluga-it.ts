@@ -36,7 +36,7 @@ pricing: {
             "Zdalne rozwiązywanie problemów",
             "Podstawowy monitoring aktualizacji",
             "Nadzór nad kopiami zapasowymi (backup)",
-            "W cenie abonamentu 2 roboczogodziny wsparcia technicznego online miesięcznie",
+            "W cenie abonamentu 3 roboczogodziny wsparcia technicznego online miesięcznie",
           ],
         },
         {
