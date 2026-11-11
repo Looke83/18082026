@@ -228,8 +228,20 @@ import { footerColumns } from "../../data/navigation";
   const submitBtn = document.getElementById(
     "contact-form-btn",
   ) as HTMLButtonElement | null;
+  const timeInput = document.getElementById(
+    "cf-form-time",
+  ) as HTMLInputElement | null;
 
-form?.addEventListener("submit", async (e) => {
+  // 1. Zapisz czas wejścia na stronę (w sekundach) od razu po załadowaniu skryptu
+  const resetFormTimer = () => {
+    if (timeInput) {
+      timeInput.value = Math.floor(Date.now() / 1000).toString();
+    }
+  };
+
+  resetFormTimer();
+
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (!form.checkValidity()) {
@@ -244,12 +256,6 @@ form?.addEventListener("submit", async (e) => {
     }
 
     try {
-      // Dynamiczne ustawienie aktualnego czasu z przeglądarki użytkownika
-      const timeInput = document.getElementById("cf-form-time") as HTMLInputElement | null;
-      if (timeInput) {
-        timeInput.value = Math.floor(Date.now() / 1000).toString();
-      }
-
       const formData = new FormData(form);
       const actionUrl = form.getAttribute("action") || "/api/contact.php";
 
@@ -273,7 +279,10 @@ form?.addEventListener("submit", async (e) => {
           "Dziękujemy! Odpowiemy w ciągu jednego dnia roboczego.";
         status.className = "mt-3 text-sm text-green-600 font-medium";
       }
+
+      // Wyczyść pola formularza i zresetuj timer pod ewentualną kolejną wiadomość
       form.reset();
+      resetFormTimer();
     } catch (err: any) {
       if (status) {
         status.textContent =

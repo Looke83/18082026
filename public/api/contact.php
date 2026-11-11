@@ -1,8 +1,4 @@
 <?php
-// Włączamy raportowanie błędów do testów
-//ini_set('display_errors', '1');
-//ini_set('display_startup_errors', '1');
-//error_reporting(E_ALL);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -30,26 +26,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // 1. Honeypot (pole "confirm_company" musi być całkowicie puste)
 if (!empty($_POST['confirm_company'])) {
-    // Udajemy sukces dla bota (tzw. tarpit / soft block)
     http_response_code(200);
     echo json_encode(['message' => 'Dziękujemy za wiadomość!']);
     exit;
 }
 
 // 2. Ochrona czasowa (Time-check)
-// Sprawdzamy, czy przesłano znacznik czasu i czy formularz nie został wysłany zbyt szybko (np. w mniej niż 3 sekundy)
+// Blokujemy boty, które wysyłają formularz w ułamku sekundy (< 2s)
 if (isset($_POST['form_time'])) {
     $form_time = (int)$_POST['form_time'];
     $current_time = time();
+    $diff = $current_time - $form_time;
 
-    // Jeśli wysłano w mniej niż 3 sekundy lub minęło więcej niż 24 godziny (stara sesja)
-    if (($current_time - $form_time) < 3 || ($current_time - $form_time) > 86400) {
-        http_response_code(200); // Udany response dla bota
+    if ($diff >= 0 && $diff < 2) {
+        http_response_code(200);
         echo json_encode(['message' => 'Dziękujemy za wiadomość!']);
         exit;
     }
 } else {
-    // Brak znacznika czasu = próba wysłania bezpośrednio przez skrypt pomijający stronę
     http_response_code(400);
     echo json_encode(['message' => 'Nieprawidłowe żądanie.']);
     exit;
@@ -70,12 +64,9 @@ if (!$name || !$email || !$message) {
 $mail = new PHPMailer(true);
 
 try {
-    // PRZEŁĄCZENIE NA WYSYŁKĘ SYSTEMOWĄ (isMail)
-    // Omija blokady portów SMTP i problemy z DNS w dhosting
     $mail->isMail();
     $mail->CharSet = 'UTF-8';
 
-    // Nadawca MUSI być podany dokładnie tak samo jak skrzynka w dAdminie (Skrzynka funkcji mail)
     $mail->setFrom('www@way-it.pl', 'Formularz way-IT');
     $mail->addReplyTo($email, $name);
     $mail->addAddress('biuro@way-it.pl');
