@@ -33,11 +33,13 @@ import { footerColumns } from "../../data/navigation";
         data-od-id="contact-form"
       >
         <!-- DODAJ TĘ LINIJKĘ WEWNĄTRZ FORMULARZA -->
-        <input
-          type="hidden"
-          name="form_time"
-          value={Math.floor(Date.now() / 1000)}
-        />
+        <!-- ZMIANA: pusta wartość w szablonie Astro -->
+<input
+  type="hidden"
+  id="cf-form-time"
+  name="form_time"
+  value=""
+/>
         <!-- HONEYPOT FIELD - pułapka na boty -->
         <div
           class="opacity-0 absolute -left-[9999px] pointer-events-none"
@@ -227,7 +229,7 @@ import { footerColumns } from "../../data/navigation";
     "contact-form-btn",
   ) as HTMLButtonElement | null;
 
-  form?.addEventListener("submit", async (e) => {
+form?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (!form.checkValidity()) {
@@ -242,6 +244,12 @@ import { footerColumns } from "../../data/navigation";
     }
 
     try {
+      // Dynamiczne ustawienie aktualnego czasu z przeglądarki użytkownika
+      const timeInput = document.getElementById("cf-form-time") as HTMLInputElement | null;
+      if (timeInput) {
+        timeInput.value = Math.floor(Date.now() / 1000).toString();
+      }
+
       const formData = new FormData(form);
       const actionUrl = form.getAttribute("action") || "/api/contact.php";
 
